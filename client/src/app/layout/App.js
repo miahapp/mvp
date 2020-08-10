@@ -4,9 +4,8 @@ import Login from "../../features/user/Login";
 import NavBar from "../../features/navbar/NavBar";
 import LoadingComponent from "./LoadingComponent";
 import { RootStoreContext } from "../stores/rootStore";
-import { Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import history from "./history";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -25,9 +24,7 @@ const App = () => {
   return (
     <Container>
       <NavBar />
-      <Router history={history}>
-        <Route path="/login" component={Login} />
-      </Router>
+      <Route path="/login" component={Login} />
     </Container>
   );
 };

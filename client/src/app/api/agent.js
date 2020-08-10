@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import history from "../layout/history";
+import { history } from "../../index";
 
 // Base URL to ping the server/backend
 axios.defaults.baseURL = "http://localhost:8000/api";
