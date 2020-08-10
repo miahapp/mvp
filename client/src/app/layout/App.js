@@ -1,9 +1,15 @@
 import React from "react";
-
-import "./App.css";
+import { Container } from "semantic-ui-react";
+import Login from "../../features/user/Login";
+import NavBar from "../../features/navbar/NavBar";
 
 const App = () => {
-  return <div>Home Page</div>;
+  return (
+    <Container>
+      <NavBar />
+      <Login />
+    </Container>
+  );
 };
 
 export default App;
