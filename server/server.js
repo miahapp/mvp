@@ -10,23 +10,6 @@ const app = express();
 //   })
 // );
 
-// Database
-// var mysql = require('mysql');
-
-// Creating database connection
-// var connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'upland91786',
-//   database: 'miah'
-// });
-
-// Connecting to database
-// connection.connect(function (err) {
-//   if (err) throw err;
-//   console.log("Connected!");
-// });
-
 // Simple route
 app.get("/", (req, res) => {
   console.log("Welcome to miah");
