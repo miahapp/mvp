@@ -1,11 +1,12 @@
+require('dotenv').config()
 const mysql = require("mysql");
 const dbConfig = require("../config/db.config.js");
 
 // Creating databse connection
-var connection = mysql.createConnection({
-    host: dbConfig.HOST,
-    user: dbConfig.USER,
-    password: dbConfig.PASSWORD,
+const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
     database: dbConfig.DB
 });
 
