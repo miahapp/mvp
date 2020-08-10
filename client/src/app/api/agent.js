@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import toast from "react-toastify";
 
 // Base URL to ping the server/backend
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = "http://localhost:8000/api";
 
 // User login - JWT token
 // E.g. When a user logins, save the JWT token in the cookies
@@ -60,6 +60,13 @@ const User = {
   register: () => requests.post(`/user/register`, user),
 };
 
+// Object of word bank
+const WordBank = {
+  list: () => requests.get(`/words`),
+  details: (id) => requests.get(`/words/${id}`),
+};
+
 export default {
   User,
+  WordBank,
 };
