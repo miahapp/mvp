@@ -1,4 +1,4 @@
-import { decorate, observable, action, computed } from "mobx";
+import { decorate, observable, action, computed, runInAction } from "mobx";
 import agent from "../api/agent";
 
 export default class UserStore {
@@ -7,7 +7,7 @@ export default class UserStore {
   }
   user = null;
 
-  isLoggedIn() {
+  get isLoggedIn() {
     return !!this.user;
   }
 
@@ -29,6 +29,17 @@ export default class UserStore {
       this.rootStore.commonStore.setToken(user.token);
     } catch (error) {
       throw error;
+    }
+  };
+
+  getUser = async () => {
+    try {
+      const user = await agent.User.current();
+      runInAction(() => {
+        this.user = user;
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 }

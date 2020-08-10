@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from "axios";
-import toast from "react-toastify";
+import axios from "axios";
+import { toast } from "react-toastify";
+import history from "../layout/history";
 
 // Base URL to ping the server/backend
 axios.defaults.baseURL = "http://localhost:8000/api";
@@ -43,21 +44,21 @@ axios.interceptors.response.use(undefined, (error) => {
 });
 
 // Response/Packets of data retrieved from the backend
-const responseBody = () => response.data;
+const responseBody = (response) => response.data;
 
 // Object of the Axios Requests
 const requests = {
-  get: () => axios.get(url).then(responseBody),
-  post: () => axios.post(url, body).then(responseBody),
-  put: () => axios.put(url, body).then(responseBody),
-  delete: () => axios.delete(url).then(responseBody),
+  get: (url) => axios.get(url).then(responseBody),
+  post: (url, body) => axios.post(url, body).then(responseBody),
+  put: (url, body) => axios.put(url, body).then(responseBody),
+  delete: (url) => axios.delete(url).then(responseBody),
 };
 
 // Object of User requests
 const User = {
   current: () => requests.get("/user"),
-  login: () => requests.post(`/user/login`, user),
-  register: () => requests.post(`/user/register`, user),
+  login: (user) => requests.post(`/user/login`, user),
+  register: (user) => requests.post(`/user/register`, user),
 };
 
 // Object of word bank
