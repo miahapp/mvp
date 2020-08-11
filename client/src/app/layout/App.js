@@ -6,6 +6,7 @@ import LoadingComponent from "./LoadingComponent";
 import { RootStoreContext } from "../stores/rootStore";
 import { Route } from "react-router-dom";
 import { observer } from "mobx-react-lite";
+import HomePage from "../../features/home/HomePage";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -19,12 +20,14 @@ const App = () => {
       setAppLoaded();
     }
   }, [getUser, setAppLoaded, token]);
-  if (!appLoaded) return <LoadingComponent content="Loading app..." />;
+  if (!appLoaded) return <LoadingComponent content="Loading miah..." />;
 
   return (
     <Container>
       <NavBar />
+      <Route exact path="/" component={HomePage} />
       <Route path="/login" component={Login} />
+      {/* <Route path="/register" component={Register} /> */}
     </Container>
   );
 };

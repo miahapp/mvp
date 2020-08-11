@@ -1,8 +1,7 @@
 import React from "react";
 import { Dimmer, Loader } from "semantic-ui-react";
 
-const LoadingComponent = ({ inverted, content }) => {
-  inverted = true;
+const LoadingComponent = ({ inverted = true, content }) => {
   return (
     <Dimmer active inverted={inverted}>
       <Loader content={content} />
