@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Menu, Container, Dropdown } from "semantic-ui-react";
+import { Menu, Container, Dropdown, Image } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink, Link } from "react-router-dom";
 import { RootStoreContext } from "../../app/stores/rootStore";
@@ -11,10 +11,12 @@ const NavBar = () => {
     <Menu fixed="top" inverted>
       <Container>
         <Menu.Item header as={NavLink} exact to="/">
-          <img
+          <Image
             src="/assets/logo.png"
             alt="miah"
             style={{ marginRight: "10px" }}
+            circular
+            size={"mini"}
           />
           miah
         </Menu.Item>
