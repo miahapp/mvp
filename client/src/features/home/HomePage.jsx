@@ -16,6 +16,7 @@ const HomePage = () => {
               src="/assets/logo.png"
               alt="miah"
               style={{ marginBottom: 12 }}
+              circular
             />
             miah
           </Header>
