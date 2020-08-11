@@ -1,4 +1,4 @@
-import { decorate, observable, action } from "mobx";
+import { decorate, observable, action, runInAction } from "mobx";
 import agent from "../api/agent";
 
 export default class WordStore {
@@ -28,6 +28,7 @@ export default class WordStore {
   };
 
   loadWord = async (id) => {
+    let word = this.getWord(id);
     if (word) {
       this.word = word;
       return word;
