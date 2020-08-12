@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "MichelleTanzil",
+      "name": "Michelle Tanzil",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/36688809?v=4",
+      "profile": "https://tanzil.dev/",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "mvp",
+  "projectOwner": "miahapp",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
