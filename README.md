@@ -1,6 +1,6 @@
 # mvp
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 miah (ML-Informed Autism Helper) is a state-of-the-art augmentative and alternative communication (AAC) tool to aid the speech impaired. By leveraging machine learning, the mission of miah is to provide equitable speech solutions and actionable data-driven insights for all users.
@@ -24,6 +24,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://tanzil.dev/"><img src="https://avatars3.githubusercontent.com/u/36688809?v=4" width="100px;" alt=""/><br /><sub><b>Michelle Tanzil</b></sub></a><br /><a href="https://github.com/miahapp/mvp/commits?author=MichelleTanzil" title="Code">💻</a> <a href="https://github.com/miahapp/mvp/pulls?q=is%3Apr+reviewed-by%3AMichelleTanzil" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/daesung626"><img src="https://avatars3.githubusercontent.com/u/57124915?v=4" width="100px;" alt=""/><br /><sub><b>daesung626</b></sub></a><br /><a href="https://github.com/miahapp/mvp/commits?author=daesung626" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/nalin97"><img src="https://avatars2.githubusercontent.com/u/32428322?v=4" width="100px;" alt=""/><br /><sub><b>nalin97</b></sub></a><br /><a href="https://github.com/miahapp/mvp/commits?author=nalin97" title="Code">💻</a></td>
   </tr>
 </table>
 
