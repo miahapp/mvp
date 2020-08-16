@@ -3,7 +3,7 @@ import { Container, Header, Divider } from "semantic-ui-react";
 
 const HomePageInfo = () => {
   return (
-    <Container text centered style={{ marginTop: "2em" }}>
+    <Container text textAlign="center" style={{ marginTop: "2em" }}>
       <Header as="h2">About Us</Header>
       <Divider />
       <p>
