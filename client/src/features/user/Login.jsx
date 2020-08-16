@@ -10,7 +10,7 @@ import {
 
 const Login = () => {
   return (
-    <Grid centered columns={2}>
+    <Grid centered columns={2} style={{ marginTop: "3em" }}>
       <Grid.Column>
         <Header as="h2" textAlign="center">
           Login

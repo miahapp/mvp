@@ -7,6 +7,7 @@ import { Route, Switch } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import HomePage from "../../features/home/HomePage";
 import NotFound from "./NotFound";
+import { Container } from "semantic-ui-react";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -25,12 +26,14 @@ const App = () => {
   return (
     <Fragment>
       <NavBar />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/login" component={Login} />
-        {/* <Route path="/register" component={Register} /> */}
-        <Route component={NotFound} />
-      </Switch>
+      <Fragment>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={Login} />
+          {/* <Route path="/register" component={Register} /> */}
+          <Route component={NotFound} />
+        </Switch>
+      </Fragment>
     </Fragment>
   );
 };

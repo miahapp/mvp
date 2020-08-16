@@ -3,17 +3,11 @@ import { Header, Image } from "semantic-ui-react";
 
 const HomePageHeader = () => {
   return (
-    <Header as="h1" content="miah" style={{ margin: "auto auto" }} vertical>
-      <Image
-        size="massive"
-        src="/assets/logo.png"
-        alt="miah"
-        centered
-        circular
-      />
-      <Header as="h2" inverted>
+    <Header vertical inverted as="h1" style={{ margin: "auto auto" }}>
+      <Image size="massive" src="/assets/logo.png" alt="miah" circular />
+      <Header.Content style={{ marginTop: "0.5em", display: "block" }}>
         Welcome to miah
-      </Header>
+      </Header.Content>
     </Header>
   );
 };

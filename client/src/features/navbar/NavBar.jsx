@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Menu, Container, Dropdown, Button } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink, Link } from "react-router-dom";
 import { RootStoreContext } from "../../app/stores/rootStore";
-import { useState } from "react";
 
 const NavBar = () => {
   const rootStore = useContext(RootStoreContext);
@@ -37,7 +36,7 @@ const NavBar = () => {
         >
           Bank
         </Menu.Item>
-        {user && (
+        {user ? (
           <Menu.Item position="right">
             <Dropdown pointing="top left" text={user.displayName}>
               <Dropdown.Menu>
@@ -51,15 +50,22 @@ const NavBar = () => {
               </Dropdown.Menu>
             </Dropdown>
           </Menu.Item>
+        ) : (
+          <Menu.Item position="right">
+            <Button as={NavLink} to="/login" inverted color="teal">
+              Log in
+            </Button>
+            <Button
+              as={NavLink}
+              to="/register"
+              style={{ marginLeft: "0.75em" }}
+              inverted
+              color="teal"
+            >
+              Sign Up
+            </Button>
+          </Menu.Item>
         )}
-        <Menu.Item position="right">
-          <Button as="a" inverted color="teal">
-            Log in
-          </Button>
-          <Button as="a" style={{ marginLeft: "0.5em" }} inverted color="teal">
-            Sign Up
-          </Button>
-        </Menu.Item>
       </Container>
     </Menu>
   );
