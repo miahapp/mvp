@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from "react";
-import { Container } from "semantic-ui-react";
+import React, { useContext, useEffect, Fragment } from "react";
 import Login from "../../features/user/Login";
 import NavBar from "../../features/navbar/NavBar";
 import LoadingComponent from "./LoadingComponent";
 import { RootStoreContext } from "../stores/rootStore";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import HomePage from "../../features/home/HomePage";
+import NotFound from "./NotFound";
+import { Container } from "semantic-ui-react";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -23,12 +24,17 @@ const App = () => {
   if (!appLoaded) return <LoadingComponent content="Loading miah..." />;
 
   return (
-    <Container>
+    <Fragment>
       <NavBar />
-      <Route exact path="/" component={HomePage} />
-      <Route path="/login" component={Login} />
-      {/* <Route path="/register" component={Register} /> */}
-    </Container>
+      <Fragment>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={Login} />
+          {/* <Route path="/register" component={Register} /> */}
+          <Route component={NotFound} />
+        </Switch>
+      </Fragment>
+    </Fragment>
   );
 };
 
