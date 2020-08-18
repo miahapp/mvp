@@ -1,4 +1,5 @@
 const User = require("../models/miah.models.js");
+const Word = require("../models/wordmodel.js");
 const bcrypt = require("bcrypt");
 
 // Create and save new User
@@ -27,5 +28,44 @@ exports.create = (req, res) => {
             });
         }
         else res.send(data);
+    });
+
+    const Word = new Word({
+        word_name = req.body.word_name, 
+        created_at = Date.now(),//add timestamp
+        updated_At = Date.now(),//add timestamp 
+        use_yn = req.body.use_yn,
+        word_icon = req.body.word_icon,
+        category_idx = req.body.category_idx
+    })
+
+    // allows the user to add word to the database
+    Word.create(word, (err, result) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Error occured while inserting word"
+            });
+        }
+        else res.send(result);
+    });
+
+    // allows the user to view the word given the word_idx
+    Word.findById(id, (err, result) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Error occured while finding word"
+            });
+        }
+        else res.send(result);
+    });
+
+    // allows the user to delete the word given it's word_idx
+    Word.delete(id, (err, result) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Error occured while deleting word"
+            });
+        }
+        else res.send(result);
     });
 };
