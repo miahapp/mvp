@@ -40,32 +40,32 @@ exports.create = (req, res) => {
     })
 
     // allows the user to add word to the database
-    Word.create(word, (err, result) => {
+    Word.create(word, (err, word) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "Error occured while inserting word"
             });
         }
-        else res.send(result);
+        else res.send(word);
     });
 
     // allows the user to view the word given the word_idx
-    Word.findById(id, (err, result) => {
+    Word.findById(id, (err, word) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "Error occured while finding word"
             });
         }
-        else res.send(result);
+        else res.send(word);
     });
 
     // allows the user to delete the word given it's word_idx
-    Word.delete(id, (err, result) => {
+    Word.delete(id, (err, word) => {
         if (err) {
             res.status(500).send({
                 message: err.message || "Error occured while deleting word"
             });
         }
-        else res.send(result);
+        else res.send(word);
     });
 };
