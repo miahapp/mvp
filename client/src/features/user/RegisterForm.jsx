@@ -97,7 +97,7 @@ const RegisterForm = () => {
               fluid
             />
             <Message>
-              Have an account? <a href="/register">Login</a>
+              Have an account? <a href="/login">Login</a>
             </Message>
           </Form>
         )}
