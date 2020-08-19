@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, Fragment } from "react";
-import Login from "../../features/user/Login";
+import Login from "../../features/user/LoginForm";
 import NavBar from "../../features/navbar/NavBar";
 import LoadingComponent from "./LoadingComponent";
 import { RootStoreContext } from "../stores/rootStore";
