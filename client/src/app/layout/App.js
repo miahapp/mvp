@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, Fragment } from "react";
-import Login from "../../features/user/Login";
+import LoginForm from "../../features/user/LoginForm";
 import NavBar from "../../features/navbar/NavBar";
 import LoadingComponent from "./LoadingComponent";
 import { RootStoreContext } from "../stores/rootStore";
@@ -7,7 +7,7 @@ import { Route, Switch } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import HomePage from "../../features/home/HomePage";
 import NotFound from "./NotFound";
-import { Container } from "semantic-ui-react";
+import RegisterForm from "../../features/user/RegisterForm";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -29,8 +29,8 @@ const App = () => {
       <Fragment>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={Login} />
-          {/* <Route path="/register" component={Register} /> */}
+          <Route path="/login" component={LoginForm} />
+          <Route path="/register" component={RegisterForm} />
           <Route component={NotFound} />
         </Switch>
       </Fragment>

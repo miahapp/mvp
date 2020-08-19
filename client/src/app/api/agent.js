@@ -19,14 +19,13 @@ axios.interceptors.request.use(
 );
 
 //Error handling - 4xx or 5xx errors
-axios.interceptors.response.use(undefined, (error) => {
+axios.interceptors.response.use((error) => {
   const { status, data, config } = error.response;
   console.log(JSON.stringify(error, null, "\t")); // printing out the error message nicely
   if (error.message === "Network error" && error.response === undefined) {
     toast.error("Network error");
   }
   if (status === 404) {
-    //TODO: Wrap index.js and App in Router - Making it accessible in here
     history.push("/notfound");
   }
   if (
