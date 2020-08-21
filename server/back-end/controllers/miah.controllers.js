@@ -1,34 +1,38 @@
 const User = require("../models/miah.models.js");
 const Word = require("../models/wordmodel.js");
+const connection = require("../../server");
 const bcrypt = require("bcrypt");
 
 // Create and save new User
-exports.create = (req, res) => {
-    // Error message
-    if (!req.body) {
-        res.status(400).send({
-            message: "Can not be empty!"
-        });
-    }
+module.exports.register = function (req, res) {
+    var today = new Date();
+    var pwd = req.body.password;
+    // encrypted_password = bcrypt.hashSync(pwd, 10);
+    var user = {
+        "first_name": req.body.first_name,
+        "last_name": req.body.last_name,
+        "dob": today,
+        "email": req.body.email,
+        "password": pwd,
+    };
 
-    // Create new User
-    const User = new User({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        dob: req.body.dob,
-        email: req.body.email,
-        password: req.body.password
-    });
-
-    // Save new User in database
-    User.create(user, (err, data) => {
-        if (err) {
-            res.status(500).send({
-                message: err.message || "Error occured while creating user"
+    connection.query('INSERT INTO user SET ?', user, function (error, results, fields) {
+        if (error) {
+            res.json({
+                status: false,
+                message: 'there are some error with query'
+            })
+            console.log("Error:", error);
+            console.log(req.body)
+        } else {
+            res.json({
+                status: true,
+                data: results,
+                message: 'user registered sucessfully'
             });
-        }
-        else res.send(data);
+        };
     });
+};
 
     const Word = new Word({
         word_name = req.body.word_name, 
@@ -68,4 +72,3 @@ exports.create = (req, res) => {
         }
         else res.send(word);
     });
-};

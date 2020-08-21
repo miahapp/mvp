@@ -1,5 +1,6 @@
 const sql = require("./db.js");
 const { response } = require("express");
+const bodyParser = require("body-parser");
 
 // user
 const User = function (user) {
@@ -10,16 +11,16 @@ const User = function (user) {
     this.passowrd = user.passowrd;
 };
 
-User.create = (newUser, result) => {
-    sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
-        console.log("created user: ", { id: res.insertID, newUser });
-        result(null, { id: res.insertID, newUser });
-    });
-};
+// User.create = (newUser, result) => {
+//     sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
+//         if (err) {
+//             console.log("error: ", err);
+//             result(err, null);
+//             return;
+//         }
+//         console.log("created user: ", { id: res.insertID, newUser });
+//         result(null, { id: res.insertID, newUser });
+//     });
+// };
 
 module.exports = User;
