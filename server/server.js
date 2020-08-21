@@ -8,15 +8,15 @@ app.use(bodyParser.json());
 require('dotenv').config();
 
 
-// const session = require("express-session");
-// app.use(
-//   session({
-//     secret: "keyboardkitteh",
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { maxAge: 60000 },
-//   })
-// );
+const session = require("express-session");
+app.use(
+  session({
+    secret: "4MtipZ6wA6",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 },
+  })
+);
 
 // Creating databse connection
 const connection = mysql.createConnection({
