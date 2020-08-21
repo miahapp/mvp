@@ -33,6 +33,29 @@ const bcrypt = require("bcrypt");
             };
         });
     };
+    
+    count = 1
+    module.exports.countUpdate = function (req, res) {
+
+        var curr = Date.now();
+        var word_idx = req.word_id; 
+        var user_idx = req.user_id
+
+        var count = {
+            clicked_At = Date.now(),
+            user_idx = req.body.user_idx,
+            word_idx = req.body.word_idx,
+            seq = count++
+        };
+    connection.query('INSERT INTO clicks_log SET ?', count, function (err, results) {
+        if (err) {
+            res.status(500).send({
+                message: err.message || "Error occured while inserting data to clicks_log"
+            })
+        } else {
+            res.send("Successfully added to clicks_log");
+        };
+    });
 
     const Word = new Word({
         word_name = req.body.word_name, 
