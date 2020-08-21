@@ -1,8 +1,6 @@
-const User = require("../controllers/miah.controllers.js");
+const miahController = require("../controllers/miah.controllers.js");
 module.exports = app => {
     // Create a new user
-    app.post("/api/users", User.create);
+    // app.post("/api/create_user", miahController.create_user);
+    app.post('/api/register', miahController.register);
 };
-
-require("./miah.routes.js")(app);
-// app.listen();
