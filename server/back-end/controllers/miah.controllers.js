@@ -5,22 +5,24 @@ const bcrypt = require("bcrypt");
 
 module.exports.register = function (req, res) {
     var today = new Date();
-    var pwd = body.password;
-    body.password = bcrypt.hashSync(pwd, 10);
-    var users = {
+    var pwd = req.body.password;
+    // encrypted_password = bcrypt.hashSync(pwd, 10);
+    var user = {
         "first_name": req.body.first_name,
         "last_name": req.body.last_name,
+        "dob": today,
         "email": req.body.email,
-        "password": body.password,
-        "created_at": today,
-        "updated_at": today
+        "password": pwd,
     };
-    connection.query('INSERT INTO users SET ?', users, function (error, results, fields) {
+
+    connection.query('INSERT INTO user SET ?', user, function (error, results, fields) {
         if (error) {
             res.json({
                 status: false,
                 message: 'there are some error with query'
             })
+            console.log("Error:", error);
+            console.log(req.body)
         } else {
             res.json({
                 status: true,

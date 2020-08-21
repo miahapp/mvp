@@ -1,12 +1,11 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
-require("./back-end/routes/miah.routes")(app);
+const mysql = require("mysql");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 require('dotenv').config();
-const mysql = require("mysql");
 
 
 // const session = require("express-session");
@@ -40,8 +39,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to miah" });
 });
 
-// Register route
-app.post('/api/register', registerController.register);
+require("./back-end/routes/miah.routes")(app);
 
 
 
