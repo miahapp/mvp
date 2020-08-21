@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+require("./back-end/routes/miah.routes")(app);
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 require('dotenv').config();
 const mysql = require("mysql");
-require("./back-end/routes/miah.routes")(app);
+
 
 // const session = require("express-session");
 // app.use(
@@ -30,6 +32,7 @@ connection.connect(function (err) {
   if (err) throw err;
   console.log("Connected to database!");
 });
+module.exports = connection;
 
 // Simple route
 app.get("/", (req, res) => {
@@ -37,7 +40,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to miah" });
 });
 
+// Register route
+app.post('/api/register', registerController.register);
+
+
 
 // Port 
 app.listen(8000, () => console.log("listening on port 8000"));
-module.exports = connection;

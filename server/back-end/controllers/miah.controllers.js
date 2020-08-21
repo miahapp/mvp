@@ -1,46 +1,32 @@
-const User = require("../models/miah.models.js");
+const User = require("../models/miah.models");
+const connection = require("../../server");
 const bcrypt = require("bcrypt");
 
-// Create and save new User
-exports.create = (req, res) => {
-    // Error message
-    if (!req.body) {
-        res.status(400).send({
-            message: "Can not be empty!"
-        });
-    }
 
-    // Create new User
-    const User = new User({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        dob: req.body.dob,
-        email: req.body.email,
-        password: req.body.password
-    });
-
-    // Save new User in database
-    // User.create(user, (err, data) => {
-    //     if (err) {
-    //         res.status(500).send({
-    //             message: err.message || "Error occured while creating user"
-    //         });
-    //     }
-    //     else res.send(data);
-    // });
-
-    User.create = (newUser, result) => {
-        var pwd = body.password;
-        body.password = bcrypt.hashSync(pwd, 10);
-
-        sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
-            if (err) {
-                console.log("error: ", err);
-                result(err, null);
-                return;
-            }
-            console.log("created user: ", { id: res.insertID, newUser });
-            result(null, { id: res.insertID, newUser });
-        });
+module.exports.register = function (req, res) {
+    var today = new Date();
+    var pwd = body.password;
+    body.password = bcrypt.hashSync(pwd, 10);
+    var users = {
+        "first_name": req.body.first_name,
+        "last_name": req.body.last_name,
+        "email": req.body.email,
+        "password": body.password,
+        "created_at": today,
+        "updated_at": today
     };
+    connection.query('INSERT INTO users SET ?', users, function (error, results, fields) {
+        if (error) {
+            res.json({
+                status: false,
+                message: 'there are some error with query'
+            })
+        } else {
+            res.json({
+                status: true,
+                data: results,
+                message: 'user registered sucessfully'
+            });
+        };
+    });
 };
