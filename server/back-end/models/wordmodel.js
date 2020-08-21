@@ -23,6 +23,19 @@ Word.create = (newWord, result) => {
     });
 };
 
+// Select every word from the database 
+Word.allWord = (result) =>{
+    sql.query("Select * from words"), (err, res) => {
+        if(err){
+            console.log("error: ", err); 
+            result(err,null); 
+            return;
+        }
+        console.log("Extracted all words"); 
+        result(null, res);
+    }
+}
+
 // Finds the word from the word database using the word_idx 
 Word.findById = (id,result)=>{
     sql.query("SELECT * from words where word_idx = ?", id, (err, res) => {
@@ -32,6 +45,18 @@ Word.findById = (id,result)=>{
             return; 
         }
         console.log("Word by Id: ", {res});
+        result(null,res);
+    })
+}
+// Find the information about word using the word_name 
+Word.findByName = (name,result)=>{
+    sql.query("SELECT * from words where word_name = ?", name, (err, res) => {
+        if(err){
+            console.log("error: ", err); 
+            result(err,null);
+            return; 
+        }
+        console.log("Word by Name: ", {res});
         result(null,res);
     })
 }
@@ -48,5 +73,19 @@ Word.delete = (id, result) => {
         result(null,res);
     });
 };
+
+Word.update = (id,category, result) => {
+    sql.query("Update words SET category_idx = ? where word_idx = ?", category, id, (err, res)=>{
+        if(err){
+            console.log("error:", err);
+            result(err,null);
+            return;
+        }
+        console.log("Update word with id :", id);
+        result(null,res);
+    })
+}
+
+// 
 
 module.exports = Word;
