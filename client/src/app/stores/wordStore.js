@@ -1,5 +1,6 @@
 import { decorate, observable, action, runInAction } from "mobx";
 import agent from "../api/agent";
+import { toast } from "react-toastify";
 
 export default class WordStore {
   constructor(rootStore) {
@@ -8,6 +9,7 @@ export default class WordStore {
   loading = false;
   wordRegistry = new Map();
   word = null;
+  wordCountRegistry = [];
 
   loadWords = async () => {
     this.loading = true;
@@ -57,6 +59,26 @@ export default class WordStore {
   clearActivity = () => {
     this.word = null;
   };
+
+  loadWordCount = async () => {
+    try {
+      if (this.rootStore.userStore.user) {
+        try {
+          const wordCount = await agent.wordCount.list();
+          runInAction("loading words", () => {
+            wordCount.forEach((word) => {
+              this.wordCountRegistry.set(word, wordCount);
+            });
+          });
+        } catch (error) {
+          runInAction("load word count error", () => {});
+          console.log(error);
+        }
+      }
+    } catch (error) {
+      toast.error("Please log in or register to find out your word stats");
+    }
+  };
 }
 decorate(WordStore, {
   wordRegistry: observable,
@@ -65,4 +87,6 @@ decorate(WordStore, {
   loadWords: action,
   loadWord: action,
   clearActivity: action,
+  loadWordCount: action,
+  wordCountRegistry: observable,
 });

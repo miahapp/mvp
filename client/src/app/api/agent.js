@@ -66,7 +66,13 @@ const WordBank = {
   details: (id) => requests.get(`/words/${id}`),
 };
 
+// Object of word count
+const WordCount = {
+  list: () => requests.get(`/wordcount`),
+};
+
 export default {
   User,
   WordBank,
+  WordCount,
 };
