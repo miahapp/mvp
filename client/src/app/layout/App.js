@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import HomePage from "../../features/home/HomePage";
 import NotFound from "./NotFound";
 import RegisterForm from "../../features/user/RegisterForm";
+import WordCountComponent from "../../features/word-count/WordCountComponent";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -31,6 +32,8 @@ const App = () => {
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
+          {/* <Route path="wordbank" component={WordBankComponent} /> */}
+          <Route path="/wordcount" component={WordCountComponent} />
           <Route component={NotFound} />
         </Switch>
       </Fragment>

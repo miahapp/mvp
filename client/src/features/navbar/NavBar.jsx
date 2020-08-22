@@ -29,12 +29,12 @@ const NavBar = () => {
         </Menu.Item>
         <Menu.Item
           as={NavLink}
-          to="/wordbank"
-          active={activeItem === "wordbank"}
-          name="wordbank"
+          to="/wordcount"
+          active={activeItem === "wordcount"}
+          name="wordcount"
           onClick={handleItemClick}
         >
-          Bank
+          Stats
         </Menu.Item>
         {user ? (
           <Menu.Item position="right">
