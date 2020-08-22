@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { Container } from "semantic-ui-react";
-import TextInput from "../../app/common/form/TextInput";
 
 const WordBankSentence = () => {
   const rootStore = useContext(RootStoreContext);

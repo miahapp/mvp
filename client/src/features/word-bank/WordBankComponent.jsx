@@ -4,6 +4,7 @@ import { Grid } from "semantic-ui-react";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { observer } from "mobx-react-lite";
 import WordBankList from "./WordBankList";
+import WordBankSentence from "./WordBankSentence";
 
 const WordBankComponent = () => {
   const rootStore = useContext(RootStoreContext);
@@ -18,7 +19,7 @@ const WordBankComponent = () => {
   return (
     <Grid style={{ marginTop: "5em" }}>
       <Grid.Column width={16}>
-        <p>Sentence Input</p>
+        <WordBankSentence />
       </Grid.Column>
       <Grid.Column width={16}>
         <WordBankList />

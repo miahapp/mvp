@@ -1,4 +1,5 @@
 import { decorate, observable, action } from "mobx";
+import * as AzureSpeech from "microsoft-cognitiveservices-speech-sdk";
 
 export default class SentenceStore {
   constructor(rootStore) {
