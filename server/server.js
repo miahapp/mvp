@@ -35,8 +35,13 @@ module.exports = connection;
 
 // Simple route
 app.get("/", (req, res) => {
-  console.log("Welcome to miah");
-  res.json({ message: "Welcome to miah" });
+  if (!req.session.userID) {
+    console.log("Welcome to miah");
+    res.json({ message: "Welcome to miah" });
+  } else {
+    res.json({ message: "NOT LOGGED IN" })
+    console.log("NOT LOGGED IN");
+  }
 });
 
 require("./back-end/routes/miah.routes")(app);

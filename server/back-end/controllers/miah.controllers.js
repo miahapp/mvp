@@ -48,16 +48,18 @@ module.exports.login = function (req, res) {
     var email = req.body.email;
     var password = req.body.password;
     // Finds user with matching email
-    connection.query('SELECT * FROM user WHERE email = ? LIMIT 1', [email], function (error, results, fields) {
-        if (results.length == 0) {
+    connection.query('SELECT * FROM user WHERE email = ? LIMIT 1', [email], function (error, i = results, fields) {
+        if (i.length == 0) {
             res.json({
                 status: false,
                 message: "No user"
             })
         } else {
             // Validates password
-            bcrypt.compare(password, results[0].password, function (error, results) {
+            bcrypt.compare(password, i[0].password, function (error, results) {
                 if (results == true) {
+                    req.session.userID = i[0].user_idx;
+                    console.log(req.session.userID);
                     res.json({
                         status: true,
                         message: "Successfully logged in"
@@ -72,3 +74,6 @@ module.exports.login = function (req, res) {
         }
     });
 };
+
+module.exports.logout = function (req, res) {
+}

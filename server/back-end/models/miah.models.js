@@ -11,19 +11,4 @@ const User = function (user) {
     this.password = user.password;
 };
 
-// User.create = (newUser, result) => {
-//     var pwd = body.password;
-//     body.password = bcrypt.hashSync(pwd, 10);
-
-//     sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
-//         if (err) {
-//             console.log("error: ", err);
-//             result(err, null);
-//             return;
-//         }
-//         console.log("created user: ", { id: res.insertID, newUser });
-//         result(null, { id: res.insertID, newUser });
-//     });
-// };
-
 module.exports = User;
