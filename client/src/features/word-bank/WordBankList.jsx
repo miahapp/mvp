@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { Header } from "semantic-ui-react";
 import WordBankListItem from "./WordBankListItem";
+import { Grid, Container } from "semantic-ui-react";
 
 const WordBankList = () => {
   const rootStore = useContext(RootStoreContext);

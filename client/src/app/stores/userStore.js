@@ -42,6 +42,12 @@ export default class UserStore {
       console.log(error);
     }
   };
+
+  logout = () => {
+    this.rootStore.commonStore.setToken(null);
+    this.user = null;
+    history.push("/");
+  };
 }
 
 decorate(UserStore, {

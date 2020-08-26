@@ -69,6 +69,7 @@ const WordBank = {
 // Object of word count
 const WordCount = {
   list: () => requests.get(`/wordcount`),
+  add: (id) => requests.post(`/wordcount/add/${id}`, {}),
 };
 
 export default {

@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
-import { Container } from "semantic-ui-react";
+import { Button, Container, Icon } from "semantic-ui-react";
 
 const WordBankSentence = () => {
   const rootStore = useContext(RootStoreContext);
