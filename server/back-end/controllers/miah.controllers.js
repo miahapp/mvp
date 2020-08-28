@@ -77,7 +77,7 @@ module.exports.login = function (req, res) {
 
 module.exports.click = function (req, res) {
     var testdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    var words = req.body.word.split(' ');
+    var words = req.body.sentence.split(' ');
     for (var i = 0; i < words.length; i++) {
         connection.query('SELECT * FROM words WHERE word_name = ?', words[i], function (error, results, fields) {
             if (results.length == 1) {
