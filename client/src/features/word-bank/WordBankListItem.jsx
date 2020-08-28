@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Image, Button } from "semantic-ui-react";
 import { categoryToColor } from "../../app/common/util/util";
 import { RootStoreContext } from "../../app/stores/rootStore";
-import SentenceStore from "../../app/stores/sentenceStore";
 
 const WordBankListItem = ({ category, word }) => {
   const rootStore = useContext(RootStoreContext);

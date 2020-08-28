@@ -1,5 +1,6 @@
 import { decorate, observable, action, computed, runInAction } from "mobx";
 import agent from "../api/agent";
+import { history } from "../../index";
 
 export default class UserStore {
   constructor(rootStore) {

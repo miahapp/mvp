@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { history } from "../../index";
 
 const dotenv = require("dotenv");
-const PORT = dotenv.PORT;
+const PORT = dotenv.BACK_PORT;
 
 // Base URL to ping the server/backend
 axios.defaults.baseURL = `http://localhost:${PORT}/api`;
