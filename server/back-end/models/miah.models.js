@@ -11,7 +11,7 @@ const User = function (user) {
     this.password = user.password;
 };
 
-const Word = function(word){
+const Word = function (word) {
     this.word_name = word.word_name;
     this.created_at = Date.now()// add new timestamp ;
     this.updated_at = Date.now()// add new timestamp ;
