@@ -75,5 +75,26 @@ module.exports.login = function (req, res) {
     });
 };
 
-module.exports.logout = function (req, res) {
-}
+module.exports.click = function (req, res) {
+    var testdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var words = req.body.word.split(' ');
+    for (var i = 0; i < words.length; i++) {
+        connection.query('SELECT * FROM words WHERE word_name = ?', words[i], function (error, results, fields) {
+            if (results.length == 1) {
+                var test = {
+                    "user_idx": req.body.userID,
+                    "clicked_at": testdate,
+                    "word_idx": results[0].word_idx
+                }
+                connection.query('INSERT INTO clicks_log SET ?', test, function (error, results, fields) {
+                })
+            } else {
+                console.log("Word not registered in database")
+            }
+        });
+    }
+    res.json({
+        status: true,
+        message: "Registered clicks!"
+    })
+};

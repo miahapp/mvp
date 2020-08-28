@@ -4,5 +4,7 @@ module.exports = app => {
     // app.post("/api/create_user", miahController.create_user);
     app.post('/api/register', miahController.register);
     app.post('/api/login', miahController.login);
-    app.post('/api/logout', miahController.logout);
+    app.post('/api/click', miahController.click);
 };
+
+
