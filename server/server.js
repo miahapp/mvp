@@ -2,10 +2,15 @@ const express = require("express");
 const app = express();
 const bodyParser = require('body-parser');
 const mysql = require("mysql");
+var cors = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 require('dotenv').config();
+//restricting the request to just localhost3000
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 
 const session = require("express-session");
