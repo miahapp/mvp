@@ -1,4 +1,4 @@
-import { decorate, observable, action, runInAction } from "mobx";
+import { decorate, observable, action, runInAction, computed } from "mobx";
 import agent from "../api/agent";
 import { toast } from "react-toastify";
 
@@ -29,6 +29,23 @@ export default class WordStore {
     }
   };
 
+  get wordsByCategories() {
+    return this.groupwordsByCategory(Array.from(this.wordRegistry.values()));
+  }
+
+  groupWordsByCategory(words) {
+    // sorts all words and reduces them into categories
+    const wordsSorted = words.sort((a, b) => {
+      return a.category.localeCompare(b.category);
+    });
+    return Object.entries(
+      wordsSorted.reduce((words, word) => {
+        const category = word.category;
+        words[category] = words[category] ? [...words[category], word] : [word];
+        return words;
+      }, {})
+    );
+  }
   loadWord = async (id) => {
     let word = this.getWord(id);
     if (word) {
@@ -56,7 +73,7 @@ export default class WordStore {
     return this.wordRegistry.get(id);
   };
 
-  clearActivity = () => {
+  clearWord = () => {
     this.word = null;
   };
 
@@ -86,7 +103,8 @@ decorate(WordStore, {
   loading: observable,
   loadWords: action,
   loadWord: action,
-  clearActivity: action,
+  clearWord: action,
   loadWordCount: action,
   wordCountRegistry: observable,
+  wordsByCategories: computed,
 });

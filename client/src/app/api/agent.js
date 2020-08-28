@@ -2,8 +2,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { history } from "../../index";
 
+const dotenv = require("dotenv");
+const PORT = dotenv.BACK_PORT;
+
 // Base URL to ping the server/backend
-axios.defaults.baseURL = "http://localhost:8000/api";
+axios.defaults.baseURL = `http://localhost:${PORT}/api`;
 
 // User login - JWT token
 // E.g. When a user logins, save the JWT token in the cookies
@@ -69,6 +72,7 @@ const WordBank = {
 // Object of word count
 const WordCount = {
   list: () => requests.get(`/wordcount`),
+  add: (id) => requests.post(`/wordcount/add/${id}`, {}),
 };
 
 export default {

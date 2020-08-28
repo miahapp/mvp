@@ -75,6 +75,15 @@ const NavBar = () => {
             >
               Sign Up
             </Button>
+            <Button
+              as={NavLink}
+              to="/wordbank"
+              style={{ marginLeft: "0.75em" }}
+              inverted
+              color="teal"
+            >
+              WordBank
+            </Button>
           </Menu.Item>
         )}
       </Container>

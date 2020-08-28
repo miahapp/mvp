@@ -1,5 +1,6 @@
 import { decorate, observable, action, computed, runInAction } from "mobx";
 import agent from "../api/agent";
+import { history } from "../../index";
 
 export default class UserStore {
   constructor(rootStore) {
@@ -41,6 +42,12 @@ export default class UserStore {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  logout = () => {
+    this.rootStore.commonStore.setToken(null);
+    this.user = null;
+    history.push("/");
   };
 }
 

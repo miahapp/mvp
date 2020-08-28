@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { Segment, Container } from "semantic-ui-react";
 import WordCountTable from "./WordCountTable";
+
 const WordCountComponent = () => {
   const rootStore = useContext(RootStoreContext);
   const { user } = rootStore.userStore;
