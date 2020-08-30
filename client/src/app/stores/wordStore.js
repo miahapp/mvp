@@ -30,7 +30,7 @@ export default class WordStore {
   };
 
   get wordsByCategories() {
-    return this.groupwordsByCategory(Array.from(this.wordRegistry.values()));
+    return this.groupWordsByCategory(Array.from(this.wordRegistry.values()));
   }
 
   groupWordsByCategory(words) {

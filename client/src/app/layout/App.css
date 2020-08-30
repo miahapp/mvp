@@ -17,3 +17,12 @@ body {
 }
 
 /*end home page styles*/
+.sentence_block {
+  border: 1px solid black;
+  height: 5vh;
+}
+
+.sentence_block:empty:not(:focus)::before {
+  content: attr(data-placeholder);
+  color: rgb(128, 128, 128, 0.5);
+}
