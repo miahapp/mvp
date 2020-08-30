@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import { Button, Container, Icon } from "semantic-ui-react";
+import Speech from "react-speech";
 
 const WordBankSentence = () => {
   const rootStore = useContext(RootStoreContext);
@@ -35,6 +36,7 @@ const WordBankSentence = () => {
           <Icon name="volume up" />
         </Button.Content>
       </Button>
+      <Speech text="Welcome to react speech" />
     </Container>
   );
 };
