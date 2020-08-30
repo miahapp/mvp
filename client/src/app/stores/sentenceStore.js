@@ -40,7 +40,7 @@ export default class SentenceStore {
       if (this.sentence == null) {
         toast.error("Add some words!");
       } else {
-        POLLY(this.params);
+        // POLLY(this.params);
       }
     } catch (error) {
       toast.error("Problem with the TTS");
