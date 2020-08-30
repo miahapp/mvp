@@ -7,7 +7,7 @@ import Speech from "react-speech";
 
 const WordBankSentence = () => {
   const rootStore = useContext(RootStoreContext);
-  const { sentence, clearSentence, textToSpeech } = rootStore.SentenceStore;
+  const { sentence, clearSentence } = rootStore.SentenceStore;
 
   const style = {
     container: {},
