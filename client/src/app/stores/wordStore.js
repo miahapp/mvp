@@ -1,5 +1,6 @@
-import { decorate, observable, action, runInAction } from "mobx";
+import { decorate, observable, action, runInAction, computed } from "mobx";
 import agent from "../api/agent";
+import { toast } from "react-toastify";
 
 export default class WordStore {
   constructor(rootStore) {
@@ -8,6 +9,7 @@ export default class WordStore {
   loading = false;
   wordRegistry = new Map();
   word = null;
+  wordCountRegistry = [];
 
   loadWords = async () => {
     this.loading = true;
@@ -27,6 +29,23 @@ export default class WordStore {
     }
   };
 
+  get wordsByCategories() {
+    return this.groupwordsByCategory(Array.from(this.wordRegistry.values()));
+  }
+
+  groupWordsByCategory(words) {
+    // sorts all words and reduces them into categories
+    const wordsSorted = words.sort((a, b) => {
+      return a.category.localeCompare(b.category);
+    });
+    return Object.entries(
+      wordsSorted.reduce((words, word) => {
+        const category = word.category;
+        words[category] = words[category] ? [...words[category], word] : [word];
+        return words;
+      }, {})
+    );
+  }
   loadWord = async (id) => {
     let word = this.getWord(id);
     if (word) {
@@ -54,8 +73,28 @@ export default class WordStore {
     return this.wordRegistry.get(id);
   };
 
-  clearActivity = () => {
+  clearWord = () => {
     this.word = null;
+  };
+
+  loadWordCount = async () => {
+    try {
+      if (this.rootStore.userStore.user) {
+        try {
+          const wordCount = await agent.wordCount.list();
+          runInAction("loading words", () => {
+            wordCount.forEach((word) => {
+              this.wordCountRegistry.set(word, wordCount);
+            });
+          });
+        } catch (error) {
+          runInAction("load word count error", () => {});
+          console.log(error);
+        }
+      }
+    } catch (error) {
+      toast.error("Please log in or register to find out your word stats");
+    }
   };
 }
 decorate(WordStore, {
@@ -64,5 +103,8 @@ decorate(WordStore, {
   loading: observable,
   loadWords: action,
   loadWord: action,
-  clearActivity: action,
+  clearWord: action,
+  loadWordCount: action,
+  wordCountRegistry: observable,
+  wordsByCategories: computed,
 });

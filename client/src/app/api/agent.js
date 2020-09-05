@@ -2,8 +2,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { history } from "../../index";
 
+const dotenv = require("dotenv");
+const PORT = dotenv.BACK_PORT;
+
 // Base URL to ping the server/backend
-axios.defaults.baseURL = "http://localhost:8000/api";
+axios.defaults.baseURL = `http://localhost:${PORT}/api`;
 
 // User login - JWT token
 // E.g. When a user logins, save the JWT token in the cookies
@@ -19,14 +22,13 @@ axios.interceptors.request.use(
 );
 
 //Error handling - 4xx or 5xx errors
-axios.interceptors.response.use(undefined, (error) => {
+axios.interceptors.response.use((error) => {
   const { status, data, config } = error.response;
   console.log(JSON.stringify(error, null, "\t")); // printing out the error message nicely
   if (error.message === "Network error" && error.response === undefined) {
     toast.error("Network error");
   }
   if (status === 404) {
-    //TODO: Wrap index.js and App in Router - Making it accessible in here
     history.push("/notfound");
   }
   if (
@@ -67,7 +69,14 @@ const WordBank = {
   details: (id) => requests.get(`/words/${id}`),
 };
 
+// Object of word count
+const WordCount = {
+  list: () => requests.get(`/wordcount`),
+  add: (id) => requests.post(`/wordcount/add/${id}`, {}),
+};
+
 export default {
   User,
   WordBank,
+  WordCount,
 };

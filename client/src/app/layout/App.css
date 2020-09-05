@@ -1,6 +1,6 @@
 body {
   background-color: rgb(234, 234, 234) !important;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .ui.inverted.top.fixed.menu {
   background-image: linear-gradient(to right, #1565c0, #b92b27) !important;

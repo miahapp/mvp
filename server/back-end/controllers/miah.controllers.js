@@ -1,131 +1,100 @@
-const User = require("../models/miah.models.js");
-const Word = require("../models/wordmodel.js");
+const User = require("../models/miah.models");
 const connection = require("../../server");
 const bcrypt = require("bcrypt");
 
-// Create and save new User
-    module.exports.register = function (req, res) {
-        var today = new Date();
-        var pwd = req.body.password;
-        // encrypted_password = bcrypt.hashSync(pwd, 10);
-        var user = {
-            "first_name": req.body.first_name,
-            "last_name": req.body.last_name,
-            "dob": today,
-            "email": req.body.email,
-            "password": pwd,
-        };
 
-        connection.query('INSERT INTO user SET ?', user, function (error, results, fields) {
-            if (error) {
-                res.json({
-                    status: false,
-                    message: 'there are some error with query'
-                })
-                console.log("Error:", error);
-                console.log(req.body)
-            } else {
-                res.json({
-                    status: true,
-                    data: results,
-                    message: 'user registered sucessfully'
+module.exports.register = function (req, res) {
+    var email = req.body.email;
+    // Checking if email already exists
+    connection.query('SELECT * FROM user WHERE email = ?', [email], function (error, results, fields) {
+        if (results.length == 1) {
+            res.json({
+                status: false,
+                message: 'email already exists'
+            });
+        } else {
+            var pwd = req.body.password;
+            // Creates hash
+            bcrypt.hash(pwd, 10, function (err, hash) {
+                var user = {
+                    "first_name": req.body.first_name,
+                    "last_name": req.body.last_name,
+                    "dob": req.body.dob,
+                    "email": req.body.email,
+                    "password": hash,
+                };
+                // Stores user with hashed password into DB
+                connection.query('INSERT INTO user SET ?', user, function (error, results, fields) {
+                    if (error) {
+                        res.json({
+                            status: false,
+                            message: 'error with query'
+                        })
+                        console.log("Error:", error);
+                    } else {
+                        res.json({
+                            status: true,
+                            data: results,
+                            message: 'user registered sucessfully'
+                        });
+                    }
                 });
-            };
-        });
-    };
-    
-    count = 1
-    module.exports.countUpdate = function (req, res) {
+            });
+        }
+    });
+};
 
-        var curr = Date.now();
-        var word_idx = req.word_id; 
-        var user_idx = req.user_id
-
-        var count = {
-            clicked_At = Date.now(),
-            user_idx = req.body.user_idx,
-            word_idx = req.body.word_idx,
-            seq = count++
-        };
-    connection.query('INSERT INTO clicks_log SET ?', count, function (err, results) {
-        if (err) {
-            res.status(500).send({
-                message: err.message || "Error occured while inserting data to clicks_log"
+module.exports.login = function (req, res) {
+    var email = req.body.email;
+    var password = req.body.password;
+    // Finds user with matching email
+    connection.query('SELECT * FROM user WHERE email = ? LIMIT 1', [email], function (error, i = results, fields) {
+        if (i.length == 0) {
+            res.json({
+                status: false,
+                message: "No user"
             })
         } else {
-            res.send("Successfully added to clicks_log");
-        };
+            // Validates password
+            bcrypt.compare(password, i[0].password, function (error, results) {
+                if (results == true) {
+                    req.session.userID = i[0].user_idx;
+                    console.log(req.session.userID);
+                    res.json({
+                        status: true,
+                        message: "Successfully logged in"
+                    })
+                } else {
+                    res.json({
+                        status: false,
+                        message: "Incorrect password"
+                    })
+                }
+            });
+        }
     });
+};
 
-    const Word = new Word({
-        word_name = req.body.word_name, 
-        created_at = Date.now(),//add timestamp
-        updated_At = Date.now(),//add timestamp 
-        use_yn = req.body.use_yn,
-        word_icon = req.body.word_icon,
-        category_idx = req.body.category_idx
+module.exports.click = function (req, res) {
+    var testdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var words = req.body.sentence.split(' ');
+    for (var i = 0; i < words.length; i++) {
+        connection.query('SELECT * FROM words WHERE word_name = ?', words[i], function (error, results, fields) {
+            if (results.length == 1) {
+                var test = {
+                    "user_idx": req.body.userID,
+                    "clicked_at": testdate,
+                    "word_idx": results[0].word_idx
+                }
+                connection.query('INSERT INTO clicks_log SET ?', test, function (error, results, fields) {
+                })
+            } else {
+                console.log("Word not registered in database")
+            }
+        });
+    }
+    res.json({
+        status: true,
+        message: "Registered clicks!"
     })
-
-    // allows the user to add word to the database
-    Word.create(word, (err, word) => {
-        if (err) {
-            res.status(500).send({
-                message: err.message || "Error occured while inserting word"
-            });
-        }
-        else res.send(word);
-    });
-
-    // allows the user to view the word given the word_idx
-    Word.findById(id, (err, word) => {
-        if (err) {
-            res.status(500).send({
-                message: err.message || "Error occured while finding word"
-            });
-        }
-        else res.send(word);
-    });
-
-
-    // Find the word from the database with that particular name
-    Word.findByName(name, (err, word) => {
-        if (err) {
-            res.status(500).send({
-                message: err.message || "Error occured while finding word"
-            });
-        }
-        else res.send(word);
-    });
-
-
-    // Gets all the words from the database
-    Word.allWord((err,words)=>{
-        if(err){
-            res.status(500).send({
-                message:err.message || "Error while getting all words"
-            });
-        }
-        else res.send(word);
-
-    });
-
-    // allows the user to delete the word given it's word_idx
-    Word.delete(id, (err, word) => {
-        if (err) {
-            res.status(500).send({
-                message: err.message || "Error occured while deleting word"
-            });
-        }
-        else res.send(word);
-    });
-
-    // allows the user to update the category of the word
-    // Let me know if we want to change anything else, we can add it 
-    Word.update(id,category, (err,word)=>{
-        if(err) {
-            res.status(500).send({
-                message: err.message || "Error occured while updating word"
-            });
-        }
-        else res.send(word);
-    })
+};
