@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { Menu, Container, Dropdown, Button } from "semantic-ui-react";
+import { Menu, Dropdown, Button, Segment, Image } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { RootStoreContext } from "../../app/stores/rootStore";
 
 const NavBar = () => {
@@ -14,8 +14,8 @@ const NavBar = () => {
   };
 
   return (
-    <Menu fixed="top" inverted size="huge" pointing secondary>
-      <Container>
+    <Segment>
+      <Menu fixed="top" inverted size="huge">
         <Menu.Item
           header
           as={NavLink}
@@ -24,8 +24,16 @@ const NavBar = () => {
           active={activeItem === "home"}
           name="home"
           onClick={handleItemClick}
+          style={{ marginLeft: "1em" }}
         >
-          Home
+          <Image
+            size="mini"
+            src="/assets/logo.jpg"
+            alt="miah"
+            circular
+            spaced="right"
+          />
+          miah
         </Menu.Item>
         {user ? (
           <Menu.Menu>
@@ -36,26 +44,26 @@ const NavBar = () => {
               name="wordcount"
               onClick={handleItemClick}
             >
-              Stats
+              Your Stats
             </Menu.Item>
             <Menu.Item
               as={NavLink}
               to="/wordbank"
               active={activeItem === "wordbank"}
-              name="wordbank"
+              name=""
               onClick={handleItemClick}
             >
-              Bank
+              Word Bank
             </Menu.Item>
             <Menu.Item position="right">
               <Dropdown pointing="top left" text={user.displayName}>
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    as={Link}
-                    to={`/profile/${user.username}`}
-                    text="My profile"
-                    icon="user"
-                  />
+                  {/* <Dropdown.Item
+                      as={Link}
+                      to={`/profile/${user.username}`}
+                      text="My profile"
+                      icon="user"
+                    /> */}
                   <Dropdown.Item onClick={logout} text="Logout" icon="power" />
                 </Dropdown.Menu>
               </Dropdown>
@@ -63,31 +71,34 @@ const NavBar = () => {
           </Menu.Menu>
         ) : (
           <Menu.Item position="right">
-            <Button as={NavLink} to="/login" inverted color="teal">
+            <Button
+              as={NavLink}
+              to="/discover"
+              style={{ backgroundColor: "white", marginLeft: "2em" }}
+              compact
+            >
+              Discover
+            </Button>
+            <Button
+              as={NavLink}
+              to="/login"
+              style={{ backgroundColor: "white", marginLeft: "2em" }}
+              compact
+            >
               Log in
             </Button>
             <Button
               as={NavLink}
               to="/register"
-              style={{ marginLeft: "0.75em" }}
-              inverted
-              color="teal"
+              compact
+              style={{ backgroundColor: "white", marginLeft: "2em" }}
             >
               Sign Up
             </Button>
-            <Button
-              as={NavLink}
-              to="/wordbank"
-              style={{ marginLeft: "0.75em" }}
-              inverted
-              color="teal"
-            >
-              WordBank
-            </Button>
           </Menu.Item>
         )}
-      </Container>
-    </Menu>
+      </Menu>
+    </Segment>
   );
 };
 

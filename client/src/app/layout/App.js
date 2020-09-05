@@ -27,8 +27,8 @@ const App = () => {
 
   return (
     <Fragment>
-      <NavBar />
       <Fragment>
+        <NavBar />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/login" component={LoginForm} />

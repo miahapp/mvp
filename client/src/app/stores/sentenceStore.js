@@ -1,18 +1,12 @@
 import { decorate, observable, action, runInAction } from "mobx";
 import agent from "../api/agent";
 import { toast } from "react-toastify";
-import { POLLY } from "../../app/common/util/util";
 
 export default class SentenceStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
   sentence = null;
-  params = {
-    Text: this.sentence,
-    OutputFormat: "mp3",
-    VoiceId: "Kimberly",
-  };
 
   addToSentence = (word) => {
     this.sentence += word.name + " ";
@@ -34,23 +28,10 @@ export default class SentenceStore {
     this.sentence = null;
   };
 
-  // Speech to text api integration
-  textToSpeech = () => {
-    try {
-      if (this.sentence == null) {
-        toast.error("Add some words!");
-      } else {
-        POLLY(this.params);
-      }
-    } catch (error) {
-      toast.error("Problem with the TTS");
-    }
-  };
+  // TODO: Send sentence to backend
 }
 decorate(SentenceStore, {
   sentence: observable,
   addToSentence: action,
   clearSentence: action,
-  textToSpeech: action,
-  params: observable,
 });
