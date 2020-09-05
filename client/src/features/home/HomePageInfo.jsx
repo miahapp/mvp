@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const HomePageInfo = () => {
   return (
-    <Grid style={{ marginTop: "1em" }} centered={true}>
+    <Grid style={{ margin: "2em 0" }} centered={true}>
       <Header as="h2">How miah works</Header>
       <Grid.Row columns={5}>
         <Grid.Column>
