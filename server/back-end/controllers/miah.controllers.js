@@ -1,6 +1,9 @@
 const User = require("../models/miah.models");
 const connection = require("../../server");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
+
+
 
 
 module.exports.register = function (req, res) {
@@ -58,11 +61,11 @@ module.exports.login = function (req, res) {
             // Validates password
             bcrypt.compare(password, i[0].password, function (error, results) {
                 if (results == true) {
-                    req.session.userID = i[0].user_idx;
-                    console.log(req.session.userID);
+                    const accessToken = jwt.sign(i[0].user_idx, process.env.ACCESS_TOKEN_SECRET)
                     res.json({
                         status: true,
-                        message: "Successfully logged in"
+                        message: "Successfully logged in",
+                        accessToken: accessToken
                     })
                 } else {
                     res.json({
