@@ -33,7 +33,11 @@ const HomePageInfo = () => {
       <Grid.Row columns={16} centered>
         <Button
           size="massive"
-          style={{ backgroundColor: "#7A93E5", padding: ".78571429em 7em" }}
+          style={{
+            backgroundColor: "#7A93E5",
+            padding: ".78571429em 7em",
+            color: "white",
+          }}
           as={Link}
           to="/register"
         >

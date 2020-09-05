@@ -57,7 +57,7 @@ const WordBankSentence = () => {
         {" "}
         <Speech
           styles={style}
-          text={sentence}
+          text={"Welcome to react speech"}
           voice={"Google UK English Female"}
           lang={"en-US"}
           displayText={"Speak"}

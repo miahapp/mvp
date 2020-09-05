@@ -54,7 +54,7 @@ const RegisterForm = () => {
             <Header
               as="h2"
               content="Sign up to miah"
-              color="teal"
+              style={{ color: "#9AADED" }}
               textAlign="center"
             />
             <Field
@@ -92,11 +92,11 @@ const RegisterForm = () => {
             <Button
               disabled={(invalid && !dirtySinceLastSubmit) || pristine}
               loading={submitting}
-              color="teal"
+              style={{ backgroundColor: "#D2D0FE", color: "white" }}
               content="Sign Up"
               fluid
             />
-            <Message>
+            <Message style={{ backgroundColor: "#9AADED", color: "white" }}>
               Have an account? <a href="/login">Login</a>
             </Message>
           </Form>

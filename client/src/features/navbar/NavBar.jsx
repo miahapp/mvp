@@ -15,7 +15,7 @@ const NavBar = () => {
 
   return (
     <Segment>
-      <Menu fixed="top" inverted size="huge" pointing secondary>
+      <Menu fixed="top" inverted size="huge">
         <Menu.Item
           header
           as={NavLink}

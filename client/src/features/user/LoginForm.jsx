@@ -51,7 +51,7 @@ const LoginForm = () => {
             <Header
               as="h2"
               content="Login to miah"
-              color="teal"
+              style={{ color: "#9AADED" }}
               textAlign="center"
             />
             <Field
@@ -69,7 +69,7 @@ const LoginForm = () => {
             <Button
               disabled={(invalid && !dirtySinceLastSubmit) || pristine}
               loading={submitting}
-              color="teal"
+              style={{ backgroundColor: "#D2D0FE", color: "white" }}
               content="Login"
               fluid
             />
@@ -79,7 +79,7 @@ const LoginForm = () => {
                 text="Invalid email or password"
               />
             )}
-            <Message>
+            <Message style={{ backgroundColor: "#9AADED", color: "white" }}>
               Haven't registered yet? <a href="/register">Sign Up</a>
             </Message>
           </Form>

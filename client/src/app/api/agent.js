@@ -2,24 +2,21 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { history } from "../../index";
 
-const dotenv = require("dotenv");
-const PORT = dotenv.BACK_PORT;
-
 // Base URL to ping the server/backend
-axios.defaults.baseURL = `http://localhost:${PORT}/api`;
+axios.defaults.baseURL = `http://localhost:8000/api`;
 
 // User login - JWT token
 // E.g. When a user logins, save the JWT token in the cookies
-axios.interceptors.request.use(
-  (config) => {
-    const token = window.localStorage.getItem("jwt");
-    if (token) config.headers.Authorization = `Token: ${token}`;
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// axios.interceptors.request.use(
+//   (config) => {
+//     const token = window.localStorage.getItem("jwt");
+//     if (token) config.headers.Authorization = `Token: ${token}`;
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 //Error handling - 4xx or 5xx errors
 axios.interceptors.response.use((error) => {

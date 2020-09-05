@@ -27,6 +27,8 @@ export default class SentenceStore {
   clearSentence = () => {
     this.sentence = null;
   };
+
+  // TODO: Send sentence to backend
 }
 decorate(SentenceStore, {
   sentence: observable,
