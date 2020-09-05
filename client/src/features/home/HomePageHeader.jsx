@@ -3,12 +3,12 @@ import { Header, Grid, Container } from "semantic-ui-react";
 
 const HomePageHeader = () => {
   return (
-    <Grid padded>
-      <Grid.Row columns={8} relaxed centered>
+    <Grid padded relaxed={true}>
+      <Grid.Row columns={8} centered>
         <Grid.Column>
           <Container text textAlign="center">
             <Header style={{ fontSize: "4em" }}>meet miah</Header>
-            <Header as="h1">ML - informed autism helper</Header>
+            <Header as="h1">ML-Informed AAC Helper</Header>
             <Header as="h3">
               {" "}
               miah (ML-Informed Autism Helper) is a state-of-the-art

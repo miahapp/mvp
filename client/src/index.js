@@ -8,6 +8,7 @@ import { createBrowserHistory } from "history";
 import "./app/layout/App.css";
 import ScrollToTop from "./app/layout/ScrollToTop";
 import dateFnsLocalizer from "react-widgets-date-fns";
+import Footer from "./features/footer/Footer.jsx";
 
 dateFnsLocalizer();
 export const history = createBrowserHistory();
@@ -17,6 +18,7 @@ ReactDOM.render(
     <ScrollToTop>
       <App />
     </ScrollToTop>
+    <Footer />
   </Router>,
   document.getElementById("root")
 );

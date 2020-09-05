@@ -4,12 +4,9 @@ import { Link } from "react-router-dom";
 
 const HomePageInfo = () => {
   return (
-    <Grid style={{ marginTop: "1em" }}>
-      <Grid.Row>
-        <Grid.Column centered columns={2}></Grid.Column>
-        <Header as="h2">How miah works</Header>
-      </Grid.Row>
-      <Grid.Row centered columns={5}>
+    <Grid style={{ marginTop: "1em" }} centered={true}>
+      <Header as="h2">How miah works</Header>
+      <Grid.Row columns={5}>
         <Grid.Column>
           <Header>Log In</Header>
           <p>
@@ -30,7 +27,7 @@ const HomePageInfo = () => {
           <p>*To be added!</p>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row columns={16} centered>
+      <Grid.Row>
         <Button
           size="massive"
           style={{
