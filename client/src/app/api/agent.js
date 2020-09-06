@@ -56,8 +56,13 @@ const requests = {
 // Object of User requests
 const User = {
   current: () => requests.get("/user"),
-  login: (user) => { requests.post(`/login`, user) },
-  register: (user) => { console.log(user); requests.post(`/register`, user) },
+  login: (user) => {
+    requests.post(`/login`, user);
+  },
+  register: (user) => {
+    console.log(user);
+    requests.post(`/register`, user);
+  },
 };
 
 // Object of word bank
@@ -70,7 +75,7 @@ const WordBank = {
 // Object of word count
 const WordCount = {
   list: () => requests.get(`/wordcount`),
-  add: (id) => requests.post(`/wordcount/add/${id}`, {}),
+  add: (sentence) => requests.post(`/wordcount/add`, sentence),
 };
 
 export default {
