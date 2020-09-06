@@ -7,7 +7,7 @@ import Speech from "react-speech";
 
 const WordBankSentence = () => {
   const rootStore = useContext(RootStoreContext);
-  const { sentence, clearSentence } = rootStore.SentenceStore;
+  const { sentence, clearSentence, addWordCount } = rootStore.SentenceStore;
 
   const style = {
     container: {},
@@ -53,11 +53,11 @@ const WordBankSentence = () => {
           <Icon name="trash" />
         </Button.Content>
       </Button>
-      <Button floated="right" color="blue" inverted>
+      <Button floated="right" color="blue" inverted onClick={addWordCount}>
         {" "}
         <Speech
           styles={style}
-          text={"Welcome to react speech"}
+          text={sentence}
           voice={"Google UK English Female"}
           lang={"en-US"}
           displayText={"Speak"}

@@ -13,26 +13,24 @@ export default class SentenceStore {
     this.sentence += word.name + " ";
   };
 
-  addWordCount = async (word) => {
+  clearSentence = () => {
+    this.sentence = null;
+  };
+
+  addWordCount = async () => {
     try {
-      await agent.WordCount.add(word.id);
-      runInAction("adding word count", () => {
-        this.addToSentence();
-      });
+      await agent.WordCount.add(this.sentence);
+      // runInAction("adding word count", () => {
+      // });
     } catch (error) {
       console.log(error);
       toast.error("Error adding to your word stats");
     }
   };
-
-  clearSentence = () => {
-    this.sentence = null;
-  };
-
-  // TODO: Send sentence to backend
 }
 decorate(SentenceStore, {
   sentence: observable,
   addToSentence: action,
   clearSentence: action,
+  addWordCount: action,
 });
