@@ -24,4 +24,5 @@ const DateInput = ({ input, placeholder, meta: { touched, error } }) => {
     </Form.Field>
   );
 };
+
 export default DateInput;

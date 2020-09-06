@@ -12,6 +12,8 @@ import {
 } from "revalidate";
 import ErrorMessage from "../../app/common/form/ErrorMessage";
 import DateInput from "../../app/common/form/DateInput";
+import { combinedDateAndTime } from "../../app/common/util/util";
+import moment from 'moment'
 
 const isValidEmail = createValidator(
   (message) => (value) => {
@@ -23,8 +25,8 @@ const isValidEmail = createValidator(
 );
 
 const validate = combineValidators({
-  firstName: isRequired("firstName"),
-  lastName: isRequired("lastName"),
+  first_name: isRequired("first_name"),
+  last_name: isRequired("last_name"),
   dob: isRequired("dob"),
   email: composeValidators(isRequired("Email"), isValidEmail)(),
   password: isRequired("password"),
@@ -33,15 +35,25 @@ const validate = combineValidators({
 const RegisterForm = () => {
   const rootStore = useContext(RootStoreContext);
   const { register } = rootStore.userStore;
+
+  const handleFinalFormSubmit = (values) => {
+    // const dateAndTime = combinedDateAndTime(values.dob);
+    const dateAndTime = moment(values.dob).format('YYYY-MM-DD');
+    values.dob = dateAndTime;
+    register(values);
+  };
+
+
   return (
     <Container style={{ marginTop: "5em" }}>
       <FinalForm
-        onSubmit={(values) =>
-          register(values).catch((error) => ({
-            [FORM_ERROR]: error,
-          }))
-        }
+        // onSubmit={(values) =>
+        //   register(values).catch((error) => ({
+        //     [FORM_ERROR]: error,
+        //   }))
+        // }
         validate={validate}
+        onSubmit={handleFinalFormSubmit}
         render={({
           handleSubmit,
           submitting,
@@ -50,57 +62,57 @@ const RegisterForm = () => {
           pristine,
           dirtySinceLastSubmit,
         }) => (
-          <Form onSubmit={handleSubmit} error>
-            <Header
-              as="h2"
-              content="Sign up to miah"
-              style={{ color: "#9AADED" }}
-              textAlign="center"
-            />
-            <Field
-              name="firstName"
-              component={TextInput}
-              placeholder="First Name"
-              type="text"
-            />
-            <Field
-              name="lastName"
-              component={TextInput}
-              placeholder="Last Name"
-              type="text"
-            />
-            <Field
-              name="dob"
-              placeholder="Date Of Birth"
-              component={DateInput}
-            />
-            <Field
-              name="email"
-              component={TextInput}
-              placeholder="Email"
-              type="email"
-            />
-            <Field
-              name="password"
-              component={TextInput}
-              placeholder="Password"
-              type="password"
-            />
-            {submitError && !dirtySinceLastSubmit && (
-              <ErrorMessage error={submitError} />
-            )}
-            <Button
-              disabled={(invalid && !dirtySinceLastSubmit) || pristine}
-              loading={submitting}
-              style={{ backgroundColor: "#D2D0FE", color: "white" }}
-              content="Sign Up"
-              fluid
-            />
-            <Message style={{ backgroundColor: "#9AADED", color: "white" }}>
-              Have an account? <a href="/login">Login</a>
-            </Message>
-          </Form>
-        )}
+            <Form onSubmit={handleSubmit} error>
+              <Header
+                as="h2"
+                content="Sign up to miah"
+                style={{ color: "#9AADED" }}
+                textAlign="center"
+              />
+              <Field
+                name="first_name"
+                component={TextInput}
+                placeholder="First Name"
+                type="text"
+              />
+              <Field
+                name="last_name"
+                component={TextInput}
+                placeholder="Last Name"
+                type="text"
+              />
+              <Field
+                name="dob"
+                placeholder="Date Of Birth"
+                component={DateInput}
+              />
+              <Field
+                name="email"
+                component={TextInput}
+                placeholder="Email"
+                type="email"
+              />
+              <Field
+                name="password"
+                component={TextInput}
+                placeholder="Password"
+                type="password"
+              />
+              {submitError && !dirtySinceLastSubmit && (
+                <ErrorMessage error={submitError} />
+              )}
+              <Button
+                disabled={(invalid && !dirtySinceLastSubmit) || pristine}
+                loading={submitting}
+                style={{ backgroundColor: "#D2D0FE", color: "white" }}
+                content="Sign Up"
+                fluid
+              />
+              <Message style={{ backgroundColor: "#9AADED", color: "white" }}>
+                Have an account? <a href="/login">Login</a>
+              </Message>
+            </Form>
+          )}
       />
     </Container>
   );
