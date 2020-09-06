@@ -1,4 +1,4 @@
-import { decorate, observable, action, reaction } from "mobx";
+import { decorate, observable, action } from "mobx";
 
 export default class CommonStore {
   constructor(rootStore) {
