@@ -2,6 +2,7 @@ const userdb = require("../controllers/postgresUser.js");
 const worddb = require("../controllers/postgresWord.js");
 
 module.exports = app => {
+    
     app.post('/users', userdb.addUser)
     app.get('/users',userdb.getUsers)
     app.delete('/users/:id',userdb.deleteUser)
