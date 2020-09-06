@@ -12,7 +12,7 @@ const WordBankListItem = ({ category, word }) => {
       key={word.id}
       style={{ color: categoryToColor.category }}
       content={word.name}
-      onClick={addToSentence}
+      onClick={() => addToSentence(word)}
     >
       <Image src={word.icon} size="medium" circular centered />
     </Button>
