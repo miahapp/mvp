@@ -19,8 +19,8 @@ axios.defaults.baseURL = `http://localhost:8000/api`;
 // );
 
 //Error handling - 4xx or 5xx errors
-axios.interceptors.response.use((error) => {
-  const { status, data, config } = error.response;
+axios.interceptors.response.use(undefined, (error) => {
+  const { status, data, config } = error;
   console.log(JSON.stringify(error, null, "\t")); // printing out the error message nicely
   if (error.message === "Network error" && error.response === undefined) {
     toast.error("Network error");
@@ -30,8 +30,8 @@ axios.interceptors.response.use((error) => {
   }
   if (
     status === 400 &&
-    config.method === "get" &&
-    data.errors.hasOwnProperty("id")
+    config.method === "get"
+    // data.errors.hasOwnProperty("id")
   ) {
     history.push("/notfound");
   }
@@ -56,14 +56,15 @@ const requests = {
 // Object of User requests
 const User = {
   current: () => requests.get("/user"),
-  login: (user) => requests.post(`/user/login`, user),
-  register: (user) => requests.post(`/user/register`, user),
+  login: (user) => { requests.post(`/login`, user) },
+  register: (user) => { console.log(user); requests.post(`/register`, user) },
 };
 
 // Object of word bank
 const WordBank = {
-  list: () => requests.get(`/words`),
+  list: () => requests.get(`/allWord`),
   details: (id) => requests.get(`/words/${id}`),
+  // categories:() => requests.get(`/categories`),
 };
 
 // Object of word count

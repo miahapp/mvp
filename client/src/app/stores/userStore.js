@@ -17,8 +17,9 @@ export default class UserStore {
       const user = await agent.User.login(values);
       runInAction(() => {
         this.user = user;
+        history.push("/wordbank")
       });
-      this.rootStore.commonStore.setToken(user.token);
+      // this.rootStore.commonStore.setToken(user.token);
     } catch (error) {
       throw error;
     }
@@ -27,7 +28,11 @@ export default class UserStore {
   register = async (values) => {
     try {
       const user = await agent.User.register(values);
-      this.rootStore.commonStore.setToken(user.token);
+      // this.rootStore.commonStore.setToken(user.token);
+      runInAction(() => {
+        this.user = user;
+        history.push("/wordbank")
+      });
     } catch (error) {
       throw error;
     }

@@ -15,17 +15,18 @@ export default class WordStore {
     this.loading = true;
     try {
       const wordBank = await agent.WordBank.list();
+      console.log("asfljsdfp;ioasd:", wordBank.data);
       runInAction("loading words", () => {
-        wordBank.forEach((word) => {
-          this.wordRegistry.set(word.id, word);
+        wordBank.data.forEach((word) => {
+          this.wordRegistry.set(word.word_idx, word);
         });
         this.loading = false;
+        console.log(this.wordRegistry);
       });
     } catch (error) {
       runInAction("load words error", () => {
         this.loading = false;
       });
-      console.log(error);
     }
   };
 
@@ -36,16 +37,17 @@ export default class WordStore {
   groupWordsByCategory(words) {
     // sorts all words and reduces them into categories
     const wordsSorted = words.sort((a, b) => {
-      return a.category.localeCompare(b.category);
+      return a.category_idx.localeCompare(b.category_idx);
     });
     return Object.entries(
       wordsSorted.reduce((words, word) => {
-        const category = word.category;
+        const category = word.category_idx;
         words[category] = words[category] ? [...words[category], word] : [word];
         return words;
       }, {})
     );
   }
+
   loadWord = async (id) => {
     let word = this.getWord(id);
     if (word) {
@@ -69,6 +71,20 @@ export default class WordStore {
     }
   };
 
+  // matchCategory = () => {
+  //   try {
+  //     const categories = await agent.WordBank.categories();
+  //     runInAction("loading categories", () => {
+  //       this.wordRegistry.values.forEach()
+  //       this.loading = false;
+  //     });
+  //   } catch (error) {
+  //     runInAction("load words error", () => {
+  //       this.loading = false;
+  //     });
+  //   }
+  // }
+
   getWord = (id) => {
     return this.wordRegistry.get(id);
   };
@@ -88,7 +104,7 @@ export default class WordStore {
             });
           });
         } catch (error) {
-          runInAction("load word count error", () => {});
+          runInAction("load word count error", () => { });
           console.log(error);
         }
       }

@@ -11,19 +11,6 @@ const User = function (user) {
     this.password = user.password;
 };
 
-<<<<<<< HEAD
-// User.create = (newUser, result) => {
-//     sql.query("INSERT INTO user SET ?", newUser, (err, res) => {
-//         if (err) {
-//             console.log("error: ", err);
-//             result(err, null);
-//             return;
-//         }
-//         console.log("created user: ", { id: res.insertID, newUser });
-//         result(null, { id: res.insertID, newUser });
-//     });
-// };
-=======
 const Word = function (word) {
     this.word_name = word.word_name;
     this.created_at = Date.now()// add new timestamp ;
@@ -32,7 +19,6 @@ const Word = function (word) {
     this.word_icon = word.word_icon;
     this.category_idx = word.category_idx;
 }
->>>>>>> master
 
 module.exports = User;
 module.exports = Word;
