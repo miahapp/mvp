@@ -12,16 +12,15 @@ export default class WordStore {
   wordCountRegistry = [];
 
   loadWords = async () => {
+
     this.loading = true;
     try {
       const wordBank = await agent.WordBank.list();
-      console.log("asfljsdfp;ioasd:", wordBank.data);
       runInAction("loading words", () => {
         wordBank.data.forEach((word) => {
           this.wordRegistry.set(word.word_idx, word);
         });
         this.loading = false;
-        console.log(this.wordRegistry);
       });
     } catch (error) {
       runInAction("load words error", () => {
@@ -37,7 +36,7 @@ export default class WordStore {
   groupWordsByCategory(words) {
     // sorts all words and reduces them into categories
     const wordsSorted = words.sort((a, b) => {
-      return a.category_idx.localeCompare(b.category_idx);
+      return toString(a.category_idx).localeCompare(toString(b.category_idx));
     });
     return Object.entries(
       wordsSorted.reduce((words, word) => {
