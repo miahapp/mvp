@@ -60,7 +60,7 @@ module.exports.allWord = function (req, res) {
 
 
 module.exports.findById = function (req, res) {
-    connection.query('SELECT word_name, word_icon, category_idx from words where word_idx = ?', req.word_idx, function (error, results) {
+    connection.query('SELECT * from words where word_idx = ?', req.word_idx, function (error, results) {
         if (error) {
             res.json({
                 status: false,
@@ -78,7 +78,7 @@ module.exports.findById = function (req, res) {
 }
 
 module.exports.findByName = function (req, res) {
-    connection.query('SELECT word_name, word_icon, category_idx from words where word_name = ?', req.word_name, function (error, results) {
+    connection.query('SELECT * from words where word_name = ?', req.word_name, function (error, results) {
         if (error) {
             res.json({
                 status: false,
