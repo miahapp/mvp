@@ -63,7 +63,7 @@ const User = {
 // Object of word bank
 const WordBank = {
   list: () => requests.get(`/allWord`),
-  details: (id) => requests.get(`/words/${id}`),
+  details: (id) => requests.get(`/findById/${id}`),
   // categories:() => requests.get(`/categories`),
 };
 

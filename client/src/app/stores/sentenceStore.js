@@ -9,6 +9,7 @@ export default class SentenceStore {
   sentence = null;
 
   addToSentence = (word) => {
+    console.log(word);
     this.sentence += word.name + " ";
   };
 
