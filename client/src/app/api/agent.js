@@ -57,18 +57,18 @@ const requests = {
 const User = {
   current: () => requests.get("/user"),
   login: (user) => {
-    requests.post(`/login`, user);
+    requests.post(`/users/login`, user);
   },
   register: (user) => {
     console.log(user);
-    requests.post(`/register`, user);
+    requests.post(`/users/register`, user);
   },
 };
 
 // Object of word bank
 const WordBank = {
-  list: () => requests.get(`/allWord`),
-  details: (id) => requests.get(`/findById/${id}`),
+  list: () => requests.get(`/words`),
+  details: (id) => requests.get(`/words/${id}`),
   // categories:() => requests.get(`/categories`),
 };
 
