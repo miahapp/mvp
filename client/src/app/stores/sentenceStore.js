@@ -6,15 +6,15 @@ export default class SentenceStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
-  sentence = null;
+  sentence = "";
 
   addToSentence = (word) => {
     console.log(word);
-    this.sentence += word.name + " ";
+    this.sentence += word + " ";
   };
 
   clearSentence = () => {
-    this.sentence = null;
+    this.sentence = "";
   };
 
   addWordCount = async () => {

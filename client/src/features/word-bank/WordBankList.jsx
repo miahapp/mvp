@@ -7,23 +7,18 @@ import { Grid, Container } from "semantic-ui-react";
 const WordBankList = () => {
   const rootStore = useContext(RootStoreContext);
   const { wordsByCategories } = rootStore.wordStore;
+  console.log("wordsByCategories: ", wordsByCategories);
   return (
-    <Container>
-      {wordsByCategories.map(([group, word]) => (
-        <Grid key={group}>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Header>{group}</Header>
-              {word.map((category, word) => (
-                <Grid.Column width={4} key={word.id}>
-                  <WordBankListItem category={category} word={word} />
-                </Grid.Column>
-              ))}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+    <Grid centered>
+      {wordsByCategories.map(([group, words]) => (
+        <Grid.Column width={2} key={group}>
+          <Header>{group}</Header>
+          {words.map((word) => (
+            <WordBankListItem category={group} word={word} key={word.id} />
+          ))}
+        </Grid.Column>
       ))}
-    </Container>
+    </Grid>
   );
 };
 

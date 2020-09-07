@@ -38,7 +38,7 @@ const WordBankSentence = () => {
 
   return (
     <Container text>
-      <p class="sentence_block" data-placeholder="Click icons below...">
+      <p className="sentence_block" data-placeholder="Click icons below...">
         {sentence}
       </p>
       <Button
@@ -53,7 +53,7 @@ const WordBankSentence = () => {
           <Icon name="trash" />
         </Button.Content>
       </Button>
-      <Button floated="right" color="blue" inverted onClick={addWordCount}>
+      <Button floated="right" color="blue" inverted>
         {" "}
         <Speech
           styles={style}
@@ -62,6 +62,7 @@ const WordBankSentence = () => {
           lang={"en-US"}
           displayText={"Speak"}
           textAsButton={true}
+          onClick={addWordCount}
         />
       </Button>
     </Container>
