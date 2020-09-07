@@ -70,6 +70,7 @@ const WordBank = {
   list: () => requests.get(`/allWord`),
   details: (id) => requests.get(`/findById/${id}`),
   categories: () => requests.get(`/categories`),
+
 };
 
 // Object of word count

@@ -17,7 +17,7 @@ export default class UserStore {
       const user = await agent.User.login(values);
       runInAction(() => {
         this.user = user;
-        history.push("/wordbank")
+        history.push("/wordbank");
       });
       // this.rootStore.commonStore.setToken(user.token);
     } catch (error) {
@@ -31,7 +31,7 @@ export default class UserStore {
       // this.rootStore.commonStore.setToken(user.token);
       runInAction(() => {
         this.user = user;
-        history.push("/wordbank")
+        history.push("/wordbank");
       });
     } catch (error) {
       throw error;
@@ -50,7 +50,7 @@ export default class UserStore {
   };
 
   logout = () => {
-    this.rootStore.commonStore.setToken(null);
+    // this.rootStore.commonStore.setToken(null);
     this.user = null;
     history.push("/");
   };
