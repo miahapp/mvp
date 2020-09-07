@@ -1,3 +1,5 @@
+const sql = require("./db.js");
+
 // Word
 const Word = function (word) {
   this.word_name = word.name;
