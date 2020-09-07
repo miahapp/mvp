@@ -57,11 +57,11 @@ const requests = {
 const User = {
   current: () => requests.get("/user"),
   login: (user) => {
-    requests.post(`/login`, user);
+    requests.post(`/users/login`, user);
   },
   register: (user) => {
     console.log(user);
-    requests.post(`/register`, user);
+    requests.post(`/users/register`, user);
   },
 };
 
@@ -70,6 +70,7 @@ const WordBank = {
   list: () => requests.get(`/allWord`),
   details: (id) => requests.get(`/findById/${id}`),
   categories: () => requests.get(`/categories`),
+
 };
 
 // Object of word count

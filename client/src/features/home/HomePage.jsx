@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Segment } from "semantic-ui-react";
 import HomePageHeader from "./HomePageHeader";
 import HomePageInfo from "./HomePageInfo";
+import Footer from "../footer/Footer";
 
 const HomePage = () => {
   return (
@@ -10,6 +11,7 @@ const HomePage = () => {
         <HomePageHeader />
       </Segment>
       <HomePageInfo />
+      <Footer />
     </Fragment>
   );
 };
