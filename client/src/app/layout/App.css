@@ -19,8 +19,9 @@ body {
 
 /*end home page styles*/
 .sentence_block {
-  border: 1px solid black;
-  height: 5vh;
+  height: 75px;
+  padding: 1em;
+  background-color: #e4e0e0;
 }
 
 .sentence_block:empty:not(:focus)::before {

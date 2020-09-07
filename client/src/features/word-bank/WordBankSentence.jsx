@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
-import { Button, Container, Icon } from "semantic-ui-react";
+import { Button, Container } from "semantic-ui-react";
 import Speech from "react-speech";
 
 const WordBankSentence = () => {
@@ -41,28 +41,20 @@ const WordBankSentence = () => {
       <p className="sentence_block" data-placeholder="Click icons below...">
         {sentence}
       </p>
-      <Button
-        floated="left"
-        animated
-        color="red"
-        inverted
-        onClick={clearSentence}
-      >
-        <Button.Content visible>Clear</Button.Content>
-        <Button.Content hidden>
-          <Icon name="trash" />
-        </Button.Content>
+      <Button floated="left" color="red" inverted onClick={clearSentence}>
+        Clear
       </Button>
       <Button floated="right" color="blue" inverted>
         {" "}
         <Speech
           styles={style}
           text={sentence}
-          voice={"Google UK English Female"}
+          voice={"Daniel"}
           lang={"en-US"}
           displayText={"Speak"}
           textAsButton={true}
           onClick={addWordCount}
+          rate="0.5"
         />
       </Button>
     </Container>

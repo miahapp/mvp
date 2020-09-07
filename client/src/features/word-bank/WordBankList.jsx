@@ -1,20 +1,29 @@
 import React, { useContext } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
-import { Header } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import WordBankListItem from "./WordBankListItem";
-import { Grid, Container } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
+import { categoryToColor } from "../../app/common/util/util";
 
 const WordBankList = () => {
   const rootStore = useContext(RootStoreContext);
   const { wordsByCategories } = rootStore.wordStore;
-  console.log("wordsByCategories: ", wordsByCategories);
   return (
     <Grid centered>
-      {wordsByCategories.map(([group, words]) => (
-        <Grid.Column width={2} key={group}>
-          <Header>{group}</Header>
+      {wordsByCategories.map(([category, words]) => (
+        <Grid.Column width={2} key={category}>
+          <Button
+            style={{
+              display: "block",
+              backgroundColor: categoryToColor[category],
+            }}
+            size="medium"
+            fluid
+          >
+            {category}
+          </Button>
           {words.map((word) => (
-            <WordBankListItem category={group} word={word} key={word.id} />
+            <WordBankListItem word={word} />
           ))}
         </Grid.Column>
       ))}

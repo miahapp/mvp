@@ -9,7 +9,7 @@ export default class SentenceStore {
   sentence = "";
 
   addToSentence = (word) => {
-    console.log(word);
+    // console.log(word);
     this.sentence += word + " ";
   };
 
