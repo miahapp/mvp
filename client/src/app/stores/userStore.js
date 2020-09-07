@@ -15,6 +15,7 @@ export default class UserStore {
   login = async (values) => {
     try {
       const user = await agent.User.login(values);
+      console.log("user from userStore: ", user);
       runInAction(() => {
         this.user = user;
         history.push("/wordbank");

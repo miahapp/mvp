@@ -1,6 +1,7 @@
 import { decorate, observable, action, runInAction, computed } from "mobx";
 import agent from "../api/agent";
 import { toast } from "react-toastify";
+import { matchCategoryToIdx } from "../../app/common/util/util.js";
 
 export default class WordStore {
   constructor(rootStore) {
@@ -10,14 +11,26 @@ export default class WordStore {
   wordRegistry = new Map();
   word = null;
   wordCountRegistry = [];
+  categories = [];
+
+  loadCategories = async () => {
+    try {
+      const categoriesFromBackEnd = await agent.WordBank.categories();
+      this.categories = categoriesFromBackEnd.data;
+      runInAction("loading categories", () => {});
+    } catch (error) {
+      toast.error("Cannot retrieve/match categories");
+    }
+  };
 
   loadWords = async () => {
-
     this.loading = true;
     try {
+      this.loadCategories();
       const wordBank = await agent.WordBank.list();
       runInAction("loading words", () => {
         wordBank.data.forEach((word) => {
+          word = matchCategoryToIdx(word, this.categories);
           this.wordRegistry.set(word.word_idx, word);
         });
         this.loading = false;
@@ -30,17 +43,23 @@ export default class WordStore {
   };
 
   get wordsByCategories() {
-    return this.groupWordsByCategory(Array.from(this.wordRegistry.values()));
+    const words = this.groupWordsByCategory(
+      Array.from(this.wordRegistry.values())
+    );
+    // console.log(words);
+    // let newWords = [words[1], words[4], words[5], words[3], words[0], words[2]]
+    return words;
   }
 
   groupWordsByCategory(words) {
     // sorts all words and reduces them into categories
     const wordsSorted = words.sort((a, b) => {
-      return toString(a.category_idx).localeCompare(toString(b.category_idx));
+      return a.category.localeCompare(b.category);
     });
+
     return Object.entries(
       wordsSorted.reduce((words, word) => {
-        const category = word.category_idx;
+        const category = word.category;
         words[category] = words[category] ? [...words[category], word] : [word];
         return words;
       }, {})
@@ -70,20 +89,6 @@ export default class WordStore {
     }
   };
 
-  // matchCategory = () => {
-  //   try {
-  //     const categories = await agent.WordBank.categories();
-  //     runInAction("loading categories", () => {
-  //       this.wordRegistry.values.forEach()
-  //       this.loading = false;
-  //     });
-  //   } catch (error) {
-  //     runInAction("load words error", () => {
-  //       this.loading = false;
-  //     });
-  //   }
-  // }
-
   getWord = (id) => {
     return this.wordRegistry.get(id);
   };
@@ -103,7 +108,7 @@ export default class WordStore {
             });
           });
         } catch (error) {
-          runInAction("load word count error", () => { });
+          runInAction("load word count error", () => {});
           console.log(error);
         }
       }
@@ -122,4 +127,6 @@ decorate(WordStore, {
   loadWordCount: action,
   wordCountRegistry: observable,
   wordsByCategories: computed,
+  loadCategories: action,
+  categories: observable,
 });

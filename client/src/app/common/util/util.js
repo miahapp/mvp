@@ -1,11 +1,11 @@
 // Assign a color based on the category of a word
 export const categoryToColor = {
-  nouns: "#91DCE2",
-  verbs: "#5ED2DA",
-  adjectives: "#5BC4E2",
+  adjectives: "#91DCE2",
+  interjections: "#5ED2DA",
+  nouns: "#5BC4E2",
   prepositions: "#6EABE7",
   pronouns: "#7B95E6",
-  interjections: "#8091CD",
+  verbs: "#8091CD",
 };
 
 // export const combinedDateAndTime = (date) => {
@@ -15,3 +15,8 @@ export const categoryToColor = {
 //   const dateString = `${year}-${month}-${day}`;
 //   return new Date(dateString + " " + "00:00:00");
 // };
+
+export const matchCategoryToIdx = (word, categories) => {
+  word.category = categories[word.category_idx - 1].category_name;
+  return word;
+};

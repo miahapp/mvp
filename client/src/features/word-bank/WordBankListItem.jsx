@@ -3,18 +3,27 @@ import { Image, Button } from "semantic-ui-react";
 import { categoryToColor } from "../../app/common/util/util";
 import { RootStoreContext } from "../../app/stores/rootStore";
 
-const WordBankListItem = ({ category, word }) => {
+const WordBankListItem = ({ word }) => {
   const rootStore = useContext(RootStoreContext);
   const { addToSentence } = rootStore.SentenceStore;
 
   return (
     <Button
-      key={word.id}
-      style={{ color: categoryToColor.category }}
-      content={word.name}
-      onClick={() => addToSentence(word)}
+      style={{
+        backgroundColor: categoryToColor[word.category],
+        margin: "1em",
+        border: "1px black solid",
+      }}
+      onClick={() => addToSentence(word.word_name)}
+      size="mini"
     >
-      <Image src={word.icon} size="medium" circular centered />
+      <Button.Content>{word.word_name}</Button.Content>
+      <Image
+        src={`/assets/word-bank/${word.category}/${word.word_name}.png`}
+        size="mini"
+        circular
+        centered
+      />
     </Button>
   );
 };

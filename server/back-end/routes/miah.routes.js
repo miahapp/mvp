@@ -10,4 +10,5 @@ module.exports = (app) => {
   app.get("/api/findByName", wordController.findByName);
   app.post("/api/delete", wordController.delete);
   app.post("/api/update", wordController.update);
+  app.get("/api/categories", wordController.categories);
 };

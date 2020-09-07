@@ -73,7 +73,7 @@ const NavBar = () => {
           <Menu.Item position="right">
             <Button
               as={NavLink}
-              to="/discover"
+              to="/wordbank"
               style={{ backgroundColor: "white", marginLeft: "2em" }}
               compact
             >
