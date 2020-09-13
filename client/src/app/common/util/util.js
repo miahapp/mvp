@@ -1,11 +1,11 @@
 // Assign a color based on the category of a word
 export const categoryToColor = {
-  adjectives: "#91DCE2",
-  interjections: "#5ED2DA",
-  nouns: "#5BC4E2",
+  interjections: "#91DCE2",
+  pronouns: "#5ED2DA",
+  verbs: "#5BC4E2",
   prepositions: "#6EABE7",
-  pronouns: "#7B95E6",
-  verbs: "#8091CD",
+  adjectives: "#7B95E6",
+  nouns: "#8091CD",
 };
 
 // export const combinedDateAndTime = (date) => {
