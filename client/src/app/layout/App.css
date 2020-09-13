@@ -13,8 +13,7 @@ body {
   display: flex;
   align-items: center;
   background-color: #d2d0fe !important;
-  height: 60vh;
-  padding: "1em 0em";
+  height: 55vh;
 }
 
 /*end home page styles*/

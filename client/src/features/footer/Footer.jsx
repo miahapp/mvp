@@ -10,9 +10,7 @@ const Footer = () => {
         width: "100%",
         top: "93.3%",
       }}
-    >
-      Info and what not
-    </Segment>
+    ></Segment>
   );
 };
 
