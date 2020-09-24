@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "miah",
   "scripts": {
-    "start": "node server/server.js && react-scripts start",
+    "start": "node server/server.js && npm start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build": "cd client && react-scripts build",
