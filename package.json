@@ -2,8 +2,9 @@
   "name": "mvp",
   "version": "1.0.0",
   "description": "miah",
+  "private": true,
   "scripts": {
-    "start": "node server/server.js && npm start",
+    "start": "concurrently \"node server/server.js\" \"cd client && npm start\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build": "cd client && react-scripts build",
@@ -42,6 +43,7 @@
     "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
