@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 var cors = require('cors');
 
+const PORT = process.env.PORT || 80;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 require('dotenv').config();
@@ -23,14 +24,18 @@ app.use(
     cookie: { maxAge: 60000 },
   })
 );
-
+let connection;
 // Creating databse connection
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB,
-});
+if (process.env.JAWSDB_URL) {
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB,
+  });
+}
 
 // Connecting to database
 connection.connect(function (err) {
@@ -58,6 +63,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Port
-app.listen(process.env.PORT || 80, () =>
-  console.log(`listening on port ${process.env.PORT}`)
-);
+app.listen(PORT, () => console.log(`listening on port ${process.env.PORT}`));
