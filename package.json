@@ -4,10 +4,10 @@
   "description": "miah",
   "private": true,
   "scripts": {
-    "start": "concurrently \"node server/server.js\" \"cd client && npm start\"",
+    "start": "node server/server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build": "cd client && react-scripts build",
+    "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build"
   },
