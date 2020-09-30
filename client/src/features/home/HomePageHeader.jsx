@@ -3,7 +3,7 @@ import { Header, Grid, Image } from 'semantic-ui-react';
 
 const HomePageHeader = () => {
   return (
-    <Grid padded relaxed={true}>
+    <Grid>
       <Grid.Row centered>
         <Grid.Column width={8} textAlign="center" verticalAlign="middle">
           <Header style={{ fontSize: '4em' }}>meet miah</Header>
@@ -18,6 +18,7 @@ const HomePageHeader = () => {
           </Header>
         </Grid.Column>
         <Grid.Column width={4} verticalAlign="top">
+
           <Image
             src="https://github.com/nmwenz90/mvp/blob/3eea5ae1a30b65fbaa0c85c8023ce4d2bb094efd/client/public/assets/iphone-miah.png?raw=true"
             size="medium"

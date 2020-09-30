@@ -11,7 +11,7 @@ const HomePage = () => {
         <HomePageHeader />
       </Segment>
       <HomePageInfo />
-      <Footer />
+      {/* <Footer /> */}
     </Fragment>
   );
 };

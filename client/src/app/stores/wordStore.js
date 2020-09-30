@@ -43,11 +43,11 @@ export default class WordStore {
   };
 
   get wordsByCategories() {
-    const words = this.groupWordsByCategory(
-      Array.from(this.wordRegistry.values())
-    );
-    // console.log(words);
-    // let newWords = [words[1], words[4], words[5], words[3], words[0], words[2]]
+    const wordRegistry = Array.from(this.wordRegistry.values());
+    let words = this.groupWordsByCategory(wordRegistry);
+    if (words.length > 0) {
+      return [words[1], words[4], words[5], words[3], words[0], words[2]];
+    }
     return words;
   }
 
