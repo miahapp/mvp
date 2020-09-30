@@ -1,4 +1,4 @@
-const sql = require("./db.js");
+const sql = require('./db.js');
 
 // Word
 const Word = function (word) {
@@ -12,9 +12,9 @@ const Word = function (word) {
 
 // Adds the word to the word database
 Word.create = (newWord, result) => {
-  sql.query("INSERT INTO words SET ?", newWord, (err, res) => {
+  sql.query('INSERT INTO words SET ?', newWord, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      console.log('error: ', err);
       result(err, null);
       return;
     }
@@ -24,68 +24,68 @@ Word.create = (newWord, result) => {
 
 // Select every word from the database
 Word.allWord = (result) => {
-  sql.query("Select * from words"),
+  sql.query('Select * from words'),
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
         return;
       }
-      console.log("Extracted all words");
+      console.log('Extracted all words');
       result(null, res);
     };
 };
 
 // Finds the word from the word database using the word_idx
 Word.findById = (id, result) => {
-  sql.query("SELECT * from words where word_idx = ?", id, (err, res) => {
+  sql.query('SELECT * from words where word_idx = ?', id, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      console.log('error: ', err);
       result(err, null);
       return;
     }
-    console.log("Word by Id: ", { res });
+    console.log('Word by Id: ', { res });
     result(null, res);
   });
 };
 // Find the information about word using the word_name
 Word.findByName = (name, result) => {
-  sql.query("SELECT * from words where word_name = ?", name, (err, res) => {
+  sql.query('SELECT * from words where word_name = ?', name, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      console.log('error: ', err);
       result(err, null);
       return;
     }
-    console.log("Word by Name: ", { res });
+    console.log('Word by Name: ', { res });
     result(null, res);
   });
 };
 
 // Deletes the word from the words dataset using the word_idx
 Word.delete = (id, result) => {
-  sql.query("Delete from words where word_idx = ?", id, (err, res) => {
+  sql.query('Delete from words where word_idx = ?', id, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      console.log('error: ', err);
       result(err, null);
       return;
     }
-    console.log("Deleted word: ", { res });
+    console.log('Deleted word: ', { res });
     result(null, res);
   });
 };
 
 Word.update = (id, category, result) => {
   sql.query(
-    "Update words SET category_idx = ? where word_idx = ?",
+    'Update words SET category_idx = ? where word_idx = ?',
     category,
     id,
     (err, res) => {
       if (err) {
-        console.log("error:", err);
+        console.log('error:', err);
         result(err, null);
         return;
       }
-      console.log("Update word with id :", id);
+      console.log('Update word with id :', id);
       result(null, res);
     }
   );
