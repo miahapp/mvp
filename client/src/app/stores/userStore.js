@@ -1,6 +1,6 @@
-import { decorate, observable, action, computed, runInAction } from "mobx";
-import agent from "../api/agent";
-import { history } from "../../index";
+import { decorate, observable, action, computed, runInAction } from 'mobx';
+import agent from '../api/agent';
+import { history } from '../../index';
 
 export default class UserStore {
   constructor(rootStore) {
@@ -15,10 +15,10 @@ export default class UserStore {
   login = async (values) => {
     try {
       const user = await agent.User.login(values);
-      console.log("user from userStore: ", user);
+      // console.log("user from userStore: ", user);
       runInAction(() => {
         this.user = user;
-        history.push("/wordbank");
+        history.push('/wordbank');
       });
       // this.rootStore.commonStore.setToken(user.token);
     } catch (error) {
@@ -32,7 +32,7 @@ export default class UserStore {
       // this.rootStore.commonStore.setToken(user.token);
       runInAction(() => {
         this.user = user;
-        history.push("/wordbank");
+        history.push('/wordbank');
       });
     } catch (error) {
       throw error;
@@ -53,7 +53,7 @@ export default class UserStore {
   logout = () => {
     // this.rootStore.commonStore.setToken(null);
     this.user = null;
-    history.push("/");
+    history.push('/');
   };
 }
 
