@@ -7,7 +7,7 @@ var cors = require('cors');
 
 // const dev = app.get('env') !== 'production'
 const normalizePort = (port) => parseInt(port, 10);
-const PORT = normalizePort(process.env.PORT || 8080);
+const PORT = normalizePort(process.env.PORT || 5000);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -63,4 +63,4 @@ require('./back-end/routes/miah.routes')(app);
 // });
 
 // Port
-app.listen(PORT, () => console.log(`listening on port ${process.env.PORT}`));
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));
