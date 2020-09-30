@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { history } from '../../index';
 
 // Base URL to ping the server/backend
-axios.defaults.baseURL = `http://localhost:5000/api`;
+axios.defaults.baseURL = `/api`;
 
 // User login - JWT token
 // E.g. When a user logins, save the JWT token in the cookies
