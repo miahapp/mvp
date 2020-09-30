@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Form as FinalForm, Field } from 'react-final-form';
+import { Link } from 'react-router-dom';
 import { Form, Button, Header, Container, Message } from 'semantic-ui-react';
 import TextInput from '../../app/common/form/TextInput';
 import { RootStoreContext } from '../../app/stores/rootStore';
@@ -108,7 +109,7 @@ const RegisterForm = () => {
               fluid
             />
             <Message style={{ backgroundColor: '#9AADED', color: 'white' }}>
-              Have an account? <a href="/login">Login</a>
+              Have an account? <Link to="/login">Login</Link>
             </Message>
           </Form>
         )}

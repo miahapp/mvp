@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Form, Header, Message, Container } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import { RootStoreContext } from '../../app/stores/rootStore';
 import {
   combineValidators,
@@ -80,7 +81,7 @@ const LoginForm = () => {
               />
             )}
             <Message style={{ backgroundColor: '#9AADED', color: 'white' }}>
-              Haven't registered yet? <a href="register">Sign Up</a>
+              Haven't registered yet? <Link to="/register">Sign Up</Link>
             </Message>
           </Form>
         )}
