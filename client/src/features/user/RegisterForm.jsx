@@ -1,19 +1,19 @@
-import React, { useContext } from "react";
-import { Form as FinalForm, Field } from "react-final-form";
-import { Form, Button, Header, Container, Message } from "semantic-ui-react";
-import TextInput from "../../app/common/form/TextInput";
-import { RootStoreContext } from "../../app/stores/rootStore";
+import React, { useContext } from 'react';
+import { Form as FinalForm, Field } from 'react-final-form';
+import { Form, Button, Header, Container, Message } from 'semantic-ui-react';
+import TextInput from '../../app/common/form/TextInput';
+import { RootStoreContext } from '../../app/stores/rootStore';
 // import { FORM_ERROR } from "final-form";
 import {
   combineValidators,
   isRequired,
   createValidator,
   composeValidators,
-} from "revalidate";
-import ErrorMessage from "../../app/common/form/ErrorMessage";
-import DateInput from "../../app/common/form/DateInput";
+} from 'revalidate';
+import ErrorMessage from '../../app/common/form/ErrorMessage';
+import DateInput from '../../app/common/form/DateInput';
 // import { combinedDateAndTime } from "../../app/common/util/util";
-import moment from "moment";
+import moment from 'moment';
 
 const isValidEmail = createValidator(
   (message) => (value) => {
@@ -21,15 +21,15 @@ const isValidEmail = createValidator(
       return message;
     }
   },
-  "Invalid email address"
+  'Invalid email address'
 );
 
 const validate = combineValidators({
-  first_name: isRequired("first_name"),
-  last_name: isRequired("last_name"),
-  dob: isRequired("dob"),
-  email: composeValidators(isRequired("Email"), isValidEmail)(),
-  password: isRequired("password"),
+  first_name: isRequired('first_name'),
+  last_name: isRequired('last_name'),
+  dob: isRequired('dob'),
+  email: composeValidators(isRequired('Email'), isValidEmail)(),
+  password: isRequired('password'),
 });
 
 const RegisterForm = () => {
@@ -38,13 +38,13 @@ const RegisterForm = () => {
 
   const handleFinalFormSubmit = (values) => {
     // const dateAndTime = combinedDateAndTime(values.dob);
-    const dateAndTime = moment(values.dob).format("YYYY-MM-DD");
+    const dateAndTime = moment(values.dob).format('YYYY-MM-DD');
     values.dob = dateAndTime;
     register(values);
   };
 
   return (
-    <Container style={{ marginTop: "5em" }}>
+    <Container style={{ marginTop: '5em' }}>
       <FinalForm
         // onSubmit={(values) =>
         //   register(values).catch((error) => ({
@@ -65,7 +65,7 @@ const RegisterForm = () => {
             <Header
               as="h2"
               content="Sign up to miah"
-              style={{ color: "#9AADED" }}
+              style={{ color: '#9AADED' }}
               textAlign="center"
             />
             <Field
@@ -103,11 +103,11 @@ const RegisterForm = () => {
             <Button
               disabled={(invalid && !dirtySinceLastSubmit) || pristine}
               loading={submitting}
-              style={{ backgroundColor: "#D2D0FE", color: "white" }}
+              style={{ backgroundColor: '#D2D0FE', color: 'white' }}
               content="Sign Up"
               fluid
             />
-            <Message style={{ backgroundColor: "#9AADED", color: "white" }}>
+            <Message style={{ backgroundColor: '#9AADED', color: 'white' }}>
               Have an account? <a href="/login">Login</a>
             </Message>
           </Form>

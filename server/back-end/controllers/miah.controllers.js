@@ -1,11 +1,11 @@
-const User = require("../models/miah.models");
-const connection = require("../../server");
-const bcrypt = require("bcrypt");
+const User = require('../models/miah.models');
+const connection = require('../../server');
+const bcrypt = require('bcrypt');
 
 module.exports.register = function (req, res) {
   var email = req.body.email;
   // Checking if email already exists
-  connection.query("SELECT * FROM users WHERE email = ?", [email], function (
+  connection.query('SELECT * FROM Users WHERE email = ?', [email], function (
     error,
     results,
     fields
@@ -13,7 +13,7 @@ module.exports.register = function (req, res) {
     if (results.length == 1) {
       res.json({
         status: false,
-        message: "email already exists",
+        message: 'email already exists',
       });
     } else {
       var pwd = req.body.password;
@@ -27,7 +27,7 @@ module.exports.register = function (req, res) {
           password: hash,
         };
         // Stores user with hashed password into DB
-        connection.query("INSERT INTO users SET ?", user, function (
+        connection.query('INSERT INTO Users SET ?', user, function (
           error,
           results,
           fields
@@ -35,14 +35,14 @@ module.exports.register = function (req, res) {
           if (error) {
             res.json({
               status: false,
-              message: "error with query",
+              message: 'error with query',
             });
-            console.log("Error:", error);
+            console.log('Error:', error);
           } else {
             res.json({
               status: true,
               data: results,
-              message: "user registered sucessfully",
+              message: 'user registered sucessfully',
             });
           }
         });
@@ -56,13 +56,13 @@ module.exports.login = function (req, res) {
   var password = req.body.password;
   // Finds user with matching email
   connection.query(
-    "SELECT * FROM users WHERE email = ? LIMIT 1",
+    'SELECT * FROM Users WHERE email = ? LIMIT 1',
     [email],
     function (error, i = results, fields) {
       if (i.length == 0) {
         res.json({
           status: false,
-          message: "No user",
+          message: 'No user',
         });
       } else {
         // Validates password
@@ -74,14 +74,14 @@ module.exports.login = function (req, res) {
             // );
             res.json({
               status: true,
-              message: "Successfully logged in",
+              message: 'Successfully logged in',
               data: results,
               // accessToken: accessToken,
             });
           } else {
             res.json({
               status: false,
-              message: "Incorrect password",
+              message: 'Incorrect password',
             });
           }
         });
@@ -91,11 +91,11 @@ module.exports.login = function (req, res) {
 };
 
 module.exports.click = function (req, res) {
-  var testdate = new Date().toISOString().slice(0, 19).replace("T", " ");
-  var words = req.body.sentence.split(" ");
+  var testdate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  var words = req.body.sentence.split(' ');
   for (var i = 0; i < words.length; i++) {
     connection.query(
-      "SELECT * FROM words WHERE word_name = ?",
+      'SELECT * FROM Words WHERE word_name = ?',
       words[i],
       function (error, results, fields) {
         if (results.length == 1) {
@@ -104,19 +104,19 @@ module.exports.click = function (req, res) {
             clicked_at: testdate,
             word_idx: results[0].word_idx,
           };
-          connection.query("INSERT INTO clicks_log SET ?", test, function (
+          connection.query('INSERT INTO Clicks_logs SET ?', test, function (
             error,
             results,
             fields
           ) {});
         } else {
-          console.log("Word not registered in database");
+          console.log('Word not registered in database');
         }
       }
     );
   }
   res.json({
     status: true,
-    message: "Registered clicks!",
+    message: 'Registered clicks!',
   });
 };

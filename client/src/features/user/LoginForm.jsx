@@ -1,16 +1,16 @@
-import React, { useContext } from "react";
-import { Button, Form, Header, Message, Container } from "semantic-ui-react";
-import { RootStoreContext } from "../../app/stores/rootStore";
+import React, { useContext } from 'react';
+import { Button, Form, Header, Message, Container } from 'semantic-ui-react';
+import { RootStoreContext } from '../../app/stores/rootStore';
 import {
   combineValidators,
   isRequired,
   createValidator,
   composeValidators,
-} from "revalidate";
-import { Form as FinalForm, Field } from "react-final-form";
-import { FORM_ERROR } from "final-form";
-import ErrorMessage from "../../app/common/form/ErrorMessage";
-import TextInput from "../../app/common/form/TextInput";
+} from 'revalidate';
+import { Form as FinalForm, Field } from 'react-final-form';
+import { FORM_ERROR } from 'final-form';
+import ErrorMessage from '../../app/common/form/ErrorMessage';
+import TextInput from '../../app/common/form/TextInput';
 
 const isValidEmail = createValidator(
   (message) => (value) => {
@@ -18,12 +18,12 @@ const isValidEmail = createValidator(
       return message;
     }
   },
-  "Invalid email address"
+  'Invalid email address'
 );
 
 const validate = combineValidators({
-  email: composeValidators(isRequired("Email"), isValidEmail)(),
-  password: isRequired("Password"),
+  email: composeValidators(isRequired('Email'), isValidEmail)(),
+  password: isRequired('Password'),
 });
 
 const LoginForm = () => {
@@ -31,7 +31,7 @@ const LoginForm = () => {
   const { login } = rootStore.userStore;
 
   return (
-    <Container style={{ marginTop: "5em" }}>
+    <Container style={{ marginTop: '5em' }}>
       <FinalForm
         onSubmit={(values) =>
           login(values).catch((error) => ({
@@ -51,7 +51,7 @@ const LoginForm = () => {
             <Header
               as="h2"
               content="Login to miah"
-              style={{ color: "#9AADED" }}
+              style={{ color: '#9AADED' }}
               textAlign="center"
             />
             <Field
@@ -69,7 +69,7 @@ const LoginForm = () => {
             <Button
               disabled={(invalid && !dirtySinceLastSubmit) || pristine}
               loading={submitting}
-              style={{ backgroundColor: "#D2D0FE", color: "white" }}
+              style={{ backgroundColor: '#D2D0FE', color: 'white' }}
               content="Login"
               fluid
             />
@@ -79,8 +79,8 @@ const LoginForm = () => {
                 text="Invalid email or password"
               />
             )}
-            <Message style={{ backgroundColor: "#9AADED", color: "white" }}>
-              Haven't registered yet? <a href="/register">Sign Up</a>
+            <Message style={{ backgroundColor: '#9AADED', color: 'white' }}>
+              Haven't registered yet? <a href="register">Sign Up</a>
             </Message>
           </Form>
         )}

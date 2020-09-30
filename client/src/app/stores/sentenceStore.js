@@ -1,20 +1,20 @@
-import { decorate, observable, action } from "mobx";
-import agent from "../api/agent";
-import { toast } from "react-toastify";
+import { decorate, observable, action } from 'mobx';
+import agent from '../api/agent';
+import { toast } from 'react-toastify';
 
 export default class SentenceStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
-  sentence = "";
+  sentence = '';
 
   addToSentence = (word) => {
     // console.log(word);
-    this.sentence += word + " ";
+    this.sentence += word + ' ';
   };
 
   clearSentence = () => {
-    this.sentence = "";
+    this.sentence = '';
   };
 
   addWordCount = async () => {
@@ -23,8 +23,8 @@ export default class SentenceStore {
       // runInAction("adding word count", () => {
       // });
     } catch (error) {
-      console.log(error);
-      toast.error("Error adding to your word stats");
+      // console.log(error);
+      toast.error('Error adding to your word stats');
     }
   };
 }

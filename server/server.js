@@ -1,10 +1,14 @@
+const path = require('path');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 var cors = require('cors');
 
-const PORT = process.env.PORT || 80;
+// const dev = app.get('env') !== 'production'
+const normalizePort = (port) => parseInt(port, 10);
+const PORT = normalizePort(process.env.PORT || 8080);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 require('dotenv').config();
@@ -20,8 +24,8 @@ app.use(
     cookie: { maxAge: 60000 },
   })
 );
-let connection;
 // Creating databse connection
+let connection;
 if (process.env.JAWSDB_URL) {
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
@@ -42,10 +46,11 @@ module.exports = connection;
 
 //for heroku (production mode)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('/../client/build'));
-} else {
-  app.use(express.static('/../client/build'));
-}
+  app.use(express.static('client/build'));
+} else app.use(express.static('client/build'));
+
+require('./back-end/routes/miah.routes')(app);
+
 // Simple route
 // app.get('/', (req, res) => {
 //   if (!req.session.userID) {
@@ -56,8 +61,6 @@ if (process.env.NODE_ENV === 'production') {
 //     console.log('NOT LOGGED IN');
 //   }
 // });
-
-require('./back-end/routes/miah.routes')(app);
 
 // Port
 app.listen(PORT, () => console.log(`listening on port ${process.env.PORT}`));
